@@ -16,6 +16,28 @@
 
 ## Решение 1
 
+Создаём БД test и загружаем в неё дамп:
+
+```shell
+docker exec -i mysql sh -c 'exec mysql test' < ./test_dump.sql
+```
+
+В списке команд находим `\s`:
+
+![Alt text](images/1.1.png)
+
+Отсюда из получаем версию сервера `8.0.36`:
+```
+Server version:         8.0.36 MySQL Community Server - GPL
+```
+
+Список таблиц:
+
+![Alt text](images/1.2.png)
+
+Количество книг с ценой за 300 (и это только **My Little Pony**):
+
+![Alt text](images/1.3.png)
 
 ---
 
@@ -30,11 +52,34 @@
     - Фамилия "Pretty"
     - Имя "James".
 
-Предоставьте привелегии пользователю `test` на операции SELECT базы `test_db`.<br/>
+Предоставьте привилегии пользователю `test` на операции SELECT базы `test_db`.<br/>
 Используя таблицу INFORMATION_SCHEMA.USER_ATTRIBUTES, получите данные по пользователю `test` и 
 **приведите в ответе к задаче**.
 
+```
+USER|HOST     |ATTRIBUTE                            |
+----+---------+-------------------------------------+
+test|localhost|{"Имя": "James", "Фамилия": "Pretty"}|
+```
+
 ## Решение 2
+
+Создаём пользователя:
+
+```SQL
+CREATE USER 'test'@'localhost' 
+IDENTIFIED WITH mysql_native_password BY 'test-pass'
+WITH MAX_QUERIES_PER_HOUR 100
+PASSWORD EXPIRE INTERVAL 180 DAY
+FAILED_LOGIN_ATTEMPTS 3
+ATTRIBUTE '{"Имя": "James", "Фамилия": "Pretty"}';
+```
+
+Выдаём привилегии (так как изначально была создана БД test, на неё):
+
+```SQL
+GRANT SELECT ON test.* TO 'test'@'localhost';
+```
 
 ---
 
