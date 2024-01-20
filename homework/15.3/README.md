@@ -16,10 +16,10 @@
 
 ## Решение 1
 
-Создаём БД test и загружаем в неё дамп:
+Создаём БД test_db и загружаем в неё дамп:
 
 ```shell
-docker exec -i mysql sh -c 'exec mysql test' < ./test_dump.sql
+docker exec -i mysql sh -c 'exec mysql test_db' < ./test_dump.sql
 ```
 
 В списке команд находим `\s`:
@@ -56,12 +56,6 @@ Server version:         8.0.36 MySQL Community Server - GPL
 Используя таблицу INFORMATION_SCHEMA.USER_ATTRIBUTES, получите данные по пользователю `test` и 
 **приведите в ответе к задаче**.
 
-```
-USER|HOST     |ATTRIBUTE                            |
-----+---------+-------------------------------------+
-test|localhost|{"Имя": "James", "Фамилия": "Pretty"}|
-```
-
 ## Решение 2
 
 Создаём пользователя:
@@ -75,11 +69,20 @@ FAILED_LOGIN_ATTEMPTS 3
 ATTRIBUTE '{"Имя": "James", "Фамилия": "Pretty"}';
 ```
 
-Выдаём привилегии (так как изначально была создана БД test, на неё):
+Выдаём привилегии:
 
 ```SQL
-GRANT SELECT ON test.* TO 'test'@'localhost';
+GRANT SELECT ON test_db.* TO 'test'@'localhost';
 ```
+
+Проверяем привилегии:
+```SQL
+SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES where USER='test';
+```
+
+Получаем:
+
+![Alt text](images/2.1.png)
 
 ---
 
@@ -93,6 +96,32 @@ GRANT SELECT ON test.* TO 'test'@'localhost';
 - на `InnoDB`.
 
 ## Решение 3
+
+Проверяем текущий `engine`:
+
+```SQL
+SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES where TABLE_SCHEMA = 'test_db';
+```
+
+Получаем, что для таблицы orders используется движок InnoDB:
+
+![Alt text](images/3.1.png)
+
+Меняем движок на MyISAM:
+
+```SQL
+ALTER TABLE orders ENGINE = MyISAM;
+```
+
+Выполняем тот же запрос для проверки движка, находим номер запроса по `SHOW PROFILES;` и выводим:
+
+![Alt text](images/3.2.png)
+
+Переключаемся на InnoDB и выполняем то же самое:
+
+![Alt text](images/3.3.png)
+
+Время выполнения заметно увеличилось.
 
 ---
 
