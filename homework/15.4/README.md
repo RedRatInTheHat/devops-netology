@@ -86,8 +86,13 @@ where
 Создаём таблицы, наследующие orders:
 
 ```SQL
-create table orders_1 (like orders including all);
-create table orders_2 (like orders including all);
+create table orders_1 (
+    check ( price > 499 )
+) inherits (orders);
+
+create table orders_2 (
+    check ( price <= 499 )
+) inherits (orders);
 ```
 
 Заполняем уже имеющимися данными, а данные из исходной таблицы удаляем:
@@ -95,20 +100,7 @@ create table orders_2 (like orders including all);
 ```SQL
 insert into orders_1 select * from orders where price > 499;
 insert into orders_2 select * from orders where price <= 499;
-delete from orders;
-```
-
-Добавляем ограничения:
-```SQL
-alter table orders_1 ADD CONSTRAINT orders_price_1 check (price > 499);
-alter table orders_2 ADD CONSTRAINT orders_price_2 check (price <= 499);
-```
-
-Добавляем наследование:
-
-```SQL
-alter table orders_1 inherit orders;
-alter table orders_2 inherit orders;
+delete from only orders;
 ```
 
 Добавляем триггер для раскидывания данных по наследникам при добавлении данных:
