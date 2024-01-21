@@ -36,6 +36,42 @@
 
 ## Решение 2
 
+Создаём БД:
+
+```SQL
+CREATE DATABASE test_database;
+```
+
+Загружаем дамп:
+
+```shell
+docker exec -i postgres sh -c 'exec psql -U postgres test_database' < ./test_dump.sql
+```
+
+Запускаем `ANALYZE`:
+
+![Alt text](images/1.1.png)
+
+Получаем столбец с наибольшим средним размером значения (получаем title):
+
+```SQL
+select
+	attname
+from
+	pg_stats
+where
+	tablename = 'orders'
+	and avg_width = (
+	select
+		max(avg_width)
+	from
+		pg_stats
+	where
+		tablename = 'orders');
+```
+
+![Alt text](images/1.2.png)
+
 ---
 
 ## Задача 3
