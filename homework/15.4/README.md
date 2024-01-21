@@ -13,6 +13,13 @@
 
 ## Решение 1
 
+Вывод списка БД: `\l[+]   [PATTERN]`<br/> 
+Подключение к БД: `\c[onnect] {[DBNAME|- USER|- HOST|- PORT|-] | conninfo}`<br/>
+Вывод списка таблиц: `\dt[S+] [PATTERN]      list tables`<br/>
+Вывода описания содержимого таблиц: `\d[S+]  NAME           describe table, view, sequence, or index`<br/>
+Выход из psql: `\q      quit psql`
+
+
 ---
 
 ## Задача 2
