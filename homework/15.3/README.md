@@ -75,7 +75,7 @@ ATTRIBUTE '{"Имя": "James", "Фамилия": "Pretty"}';
 GRANT SELECT ON test_db.* TO 'test'@'localhost';
 ```
 
-Проверяем привилегии:
+Проверяем аттрибуты:
 ```SQL
 SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES where USER='test';
 ```
