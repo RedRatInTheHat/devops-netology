@@ -35,7 +35,98 @@
 
 ## Решение 1
 
+Создадим Dockerfile следующего вида:
 
+```Dockerfile
+FROM centos:7
+
+ENV container docker
+
+EXPOSE 9200
+
+RUN (cd /lib/systemd/system/sysinit.target.wants/; \
+for i in *; \
+do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; \
+done); \
+rm -f /lib/systemd/system/multi-user.target.wants/*;\
+rm -f /etc/systemd/system/*.wants/*;\
+rm -f /lib/systemd/system/local-fs.target.wants/*; \
+rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+rm -f /lib/systemd/system/basic.target.wants/*;\
+rm -f /lib/systemd/system/anaconda.target.wants/*;
+
+
+WORKDIR /tmp
+
+COPY elasticsearch-8.12.0-linux-x86_64.tar.gz .
+
+RUN tar -xzf elasticsearch-8.12.0-linux-x86_64.tar.gz -C /opt/; \
+echo "node.name: netology_test" >>  /opt/elasticsearch-8.12.0/config/elasticsearch.yml; \
+echo "path.data: /var/lib" >> /opt/elasticsearch-8.12.0/config/elasticsearch.yml; \
+echo "path.logs: /var/lib" >> /opt/elasticsearch-8.12.0/config/elasticsearch.yml; \
+echo "xpack.security.enabled: false" >> /opt/elasticsearch-8.12.0/config/elasticsearch.yml; \
+echo "xpack.security.enrollment.enabled: false" >> /opt/elasticsearch-8.12.0/config/elasticsearch.yml; \
+echo "network.host: 127.0.0.1" >> /opt/elasticsearch-8.12.0/config/elasticsearch.yml; \
+echo "http.host: 0.0.0.0" >> /opt/elasticsearch-8.12.0/config/elasticsearch.yml; \
+useradd elasticsearch; \
+chown -R elasticsearch /opt/elasticsearch-8.12.0/; \
+chown -R elasticsearch /var/lib;
+
+USER elasticsearch
+CMD sh /opt/elasticsearch-8.12.0/bin/elasticsearch
+```
+
+Так как напрямую по ссылке нужный пакет Elasticsearch больше недоступен, был изменён способ установки. Предполагается, что пакет скачан заранее и находится на локальной машине. 
+
+Помимо выполнения указанных требований добавлена возможность подключения без аутентификаци (для упрощения жизни, благо что использоваться он будет только для тестирования).
+
+Публикуем. Тогда:
+
+* Манифест:
+
+```
+{
+        "schemaVersion": 2,
+        "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+        "config": {
+                "mediaType": "application/vnd.docker.container.image.v1+json",
+                "size": 4435,
+                "digest": "sha256:a4b04af818c0a6da5ef97e60c9bcaf68db18561dee5505858263aa2488220f08"
+        },
+        "layers": [
+                {
+                        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+                        "size": 76097157,
+                        "digest": "sha256:2d473b07cdd5f0912cd6f1a703352c82b512407db6b05b43f2553732b55df3bc"
+                },
+                {
+                        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+                        "size": 1209,
+                        "digest": "sha256:b63ff9376ce1c22702710f0559dc744d5d7c976b738658357de2c23d01d0abb9"
+                },
+                {
+                        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+                        "size": 32,
+                        "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1"
+                },
+                {
+                        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+                        "size": 618504071,
+                        "digest": "sha256:b88c8c5900f3740e9087b537d0f9817c027a33ed6950806dc5753c34d06127ba"
+                },
+                {
+                        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+                        "size": 634836129,
+                        "digest": "sha256:e00e6f909fdae03f18825e4bb933067f071df83e30fc6c7355b7d1492facdb4a"
+                }
+        ]
+}
+```
+* Образ на dockerHub: https://hub.docker.com/layers/redratinthehat/c7-elastic/1.2/images/sha256-18413923117e4cbb839c4962f0e497d3eea8f2ce550d0fec997d41d9836e4217?tab=layers
+* Ответ из собранного контейнера:
+
+![Alt text](img/1.1.png)
 
 ---
 
