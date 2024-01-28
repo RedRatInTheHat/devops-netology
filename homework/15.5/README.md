@@ -177,8 +177,7 @@ cation/json' -d'
 }
 '
 
-curl -X PUT "localhost:9200/ind-2" -H 'Content-Type: appli
-cation/json' -d'
+curl -X PUT "localhost:9200/ind-2" -H 'Content-Type: application/json' -d'
 {
   "settings": {
     "index": {
@@ -189,8 +188,7 @@ cation/json' -d'
 }
 '
 
-curl -X PUT "localhost:9200/ind-3" -H 'Content-Type: appli
-cation/json' -d'
+curl -X PUT "localhost:9200/ind-3" -H 'Content-Type: application/json' -d'
 {
   "settings": {
     "index": {
@@ -249,5 +247,33 @@ cation/json' -d'
 - возможно, вам понадобится доработать `elasticsearch.yml` в части директивы `path.repo` и перезапустить `Elasticsearch`.
 
 ## Решение 3
+
+Немного правим Dockerfile, чтобы добавить path.repo, создаём новый image, запускаем новый контейнер.
+
+Создаём путь для бэкапов:
+
+![Alt text](img/3.1.png)
+
+И новый индекс:
+
+![Alt text](img/3.2.png)
+
+Создаём бэкап:
+
+![Alt text](img/3.3.png)
+
+Забегаем в директорию `snapshots`. Тут у нас появилось несколько файлов и директорий:
+
+![Alt text](img/3.4.png)
+
+Удаляем старый индекс, создаём новый:
+
+![Alt text](img/3.5.png)
+
+Восстанавливаем бэкап и любуемся:
+
+![Alt text](img/3.6.png)
+
+Теперь у нас два индекса. `test`, впрочем, не сильно хорошо себя чувствует. Зато есть.
 
 ---
