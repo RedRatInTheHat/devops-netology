@@ -10,3 +10,4 @@
 * [15.3 MySQL](homework/15.3/README.md)
 * [15.4 PostgreSQL](homework/15.4/README.md)
 * [15.5 Elasticsearch](homework/15.5/README.md)
+* [15.6 Troubleshooting](homework/15.6/README.md)
