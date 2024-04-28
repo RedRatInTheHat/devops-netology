@@ -13,3 +13,4 @@
 * [15.6 Troubleshooting](homework/15.6/README.md)
 * [Курсовая работа](https://github.com/RedRatInTheHat/termPaper)
 * [16.1 Введение в виртуализацию. Типы и функции гипервизоров. Обзор рынка вендоров и областей применения](homework/16.1/README.md)
+* [16.2 Применение принципов IaaC в работе с виртуальными машинами](homework/16.2/README.md)
