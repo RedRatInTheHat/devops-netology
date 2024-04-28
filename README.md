@@ -11,3 +11,5 @@
 * [15.4 PostgreSQL](homework/15.4/README.md)
 * [15.5 Elasticsearch](homework/15.5/README.md)
 * [15.6 Troubleshooting](homework/15.6/README.md)
+* [Курсовая работа](https://github.com/RedRatInTheHat/termPaper)
+* [16.1 Введение в виртуализацию. Типы и функции гипервизоров. Обзор рынка вендоров и областей применения](homework/16.1/README.md)
