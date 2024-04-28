@@ -49,6 +49,10 @@ Error: The requested URL returned error: 404:
 
 ## Решение 2
 
+Виртуальная машина успешно создана по Vagrantfile; к ней можно подключиться по ssh и обнаружить, что docker и docker compose также успешно установлены:
+
+![alt text](images/2.1.png)
+
 ---
 
 ## Задача 3
