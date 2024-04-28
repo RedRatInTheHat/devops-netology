@@ -70,4 +70,16 @@ Error: The requested URL returned error: 404:
 
 ## Решение 3
 
+Создан файл [mydebian.json.pkr.hcl](packer/mydebian.json.pkr.hcl).
+
+Средствами packer создан образ:
+
+![alt text](images/3.1.png)
+
+![alt text](images/3.2.png)
+
+Из образа создана ВМ; при подключении к ней видны установленные docker, docker compose, htop и tmux:
+
+![alt text](images/3.3.png)
+
 ---
