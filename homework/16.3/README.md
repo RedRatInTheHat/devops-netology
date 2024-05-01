@@ -163,4 +163,41 @@ services:
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод, файл compose.yaml , скриншот portainer c задеплоенным компоузом.
 
+
+### Решение 5
+
+1. Поднимаем контейнеры, по результату (и логам) видим, что docker видит два compose файла и использует `compose.yaml`:
+
+![alt text](images/16.3.5.1.png)
+
+Из двух вариантов Docker предпочитает `compose.yaml`, а `docker-compose.yaml` ест так, из соображений обратной совместимости.
+
+2. Добавляем в `compose.yaml` подключение второго файла:
+```yaml
+include:
+  - ./docker-compose.yaml
+```
+Получаем [compose.yaml](compose.yaml).<br/>
+Теперь поднимаются два контейнера:
+
+![alt text](images/16.3.5.2.png)
+
+3. Отправляем `custon-nginx:latest` в созданное registry:
+
+![alt text](images/16.3.5.3.png)
+
+В stacks подключаем образ из registry:
+
+![alt text](images/16.3.5.4.png)
+
+Теперь можем получить приветствие с 9090:
+
+![alt text](images/16.3.5.5.png)
+
+4. Перемещаем файл `compose.yaml` и тушим проект вместе с "осиротевшим" portainer:
+
+![alt text](images/16.3.5.6.png)
+
+Правда, nginx остаётся жить. Но он, вроде, и не относится к текущему compose.
+
 ---
