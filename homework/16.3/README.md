@@ -16,7 +16,13 @@ Hey, Netology
 </html>
 ```
 - Соберите и отправьте созданный образ в свой dockerhub-репозитории c tag 1.0.0 . 
-- Предоставьте ответ в виде ссылки на https://hub.docker.com/<username_repo>/custom-nginx/general .
+- Предоставьте ответ в виде ссылки на https://hub.docker.com/<username_repo>/custom-nginx/general.
+
+### Решение 1
+
+[Созданный образ в репозитории redratinthehat](https://hub.docker.com/repository/docker/redratinthehat/custom-nginx/general)
+
+---
 
 ## Задача 2
 1. Запустите ваш образ custom-nginx:1.0.0 командой docker run в соответвии с требованиями:
@@ -28,7 +34,6 @@ Hey, Netology
 4. Убедитесь с помощью curl или веб браузера, что индекс-страница доступна.
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
-
 
 ## Задача 3
 1. Воспользуйтесь docker help или google, чтобы узнать как подключиться к стандартному потоку ввода/вывода/ошибок контейнера "custom-nginx-t2".
