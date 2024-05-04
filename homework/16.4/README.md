@@ -93,6 +93,8 @@ docker run -d --network='web' -e 'DB_HOST=172.20.0.5' --name web -p 8080:5000 li
 
 ![alt text](images/16.4.3.2.png)
 
+Останавливаем всё это хозяйство через `docker compose down`.
+
 ---
 
 ## Задача 4
