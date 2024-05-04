@@ -131,6 +131,22 @@ docker run -d --network='web' -e 'DB_HOST=172.20.0.5' --name web -p 8080:5000 li
 
 ### Решение 5
 
+Для создания бэкапов создан скрипт [run-backup.sh](run-backup.sh). Как и в предыдущем задании, переменные, содержащие данные о БД, вынесены в скрипт `secret.sh`.
+
+При запуске образа `schnitzler/mysqldump` выяснилось, что с `mysql:8` поменялся используемый плагин аутентификации, и так просто уже не подключишься:<br/>
+`ERROR 1045 (28000): Plugin caching_sha2_password could not be loaded: Error loading shared library /usr/lib/mariadb/plugin/caching_sha2_password.so: No such file or directory`
+
+Тут было 3 путя:
+1. Использовать mysql версии 5.
+2. Каждый раз скачивать `mariadb-connector-c-dev` в контейнер.
+3. Собрать свой образ на основе `schnitzler/mysqldump` с нужной библиотекой.
+
+В решении используется 2 вариант как компромисный. В боевом решении, конечно, нужно было бы использовать вариант 3.
+
+Вызовом `crontab -e` создан файл [root](root), где настроен ежеминутный вызов написанного скрипта.<br/>
+Файлы исправно складываются в `/opt/backup`:
+
+![alt text](images/16.4.5.1.png)
 
 ---
 
