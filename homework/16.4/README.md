@@ -165,6 +165,36 @@ docker run -d --network='web' -e 'DB_HOST=172.20.0.5' --name web -p 8080:5000 li
 
 ### Решение 6
 
+#### dive + docker save
+
+Скачиваем `dive` и исследуем им `hashicorp/terraform:latest`. Находим слой, где в `/bin/terraform` копируется искомый файл:
+
+![alt text](images/16.4.6.1.png)
+
+Сохраняем образ в `terraform.tar`:
+
+![alt text](images/16.4.6.2.png)
+
+А потом распаковываем эту матрёшку, завершая слоем `1bac...`, найденным ранее:
+
+![alt text](images/16.4.6.3.png)
+
+Файл успешно получен.
+
+#### docker cp
+
+Запускаем контейнер terraform и бессовестно копируем оттуда файл `/bin/terraform`
+
+![alt text](images/16.4.6.4.png)
+
+#### docker build
+
+Для извлечения только нужного файла создаём отдельный слой, куда утаскиваем файл terraform. Получаем забавный файл [Docker.terraform](Dockerfile.terraform)
+
+Собираем файл с опцией `--output` и заимствуем файл:
+
+![alt text](images/16.4.6.5.png)
+
 ---
 
 ## Задача 7 (***)
