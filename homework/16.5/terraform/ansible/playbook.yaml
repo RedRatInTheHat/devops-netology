@@ -1,0 +1,21 @@
+---
+- name: Initialise hosts
+  hosts: all
+  roles:
+    - initialisation
+    - docker
+
+- name: Initialise docker swarm
+  hosts: master
+  roles:
+    - docker-swarm
+
+- name: Add workers
+  hosts: slave
+  roles:
+    - swarm-slave
+
+- name: Run listener
+  hosts: master
+  roles:
+    - listener

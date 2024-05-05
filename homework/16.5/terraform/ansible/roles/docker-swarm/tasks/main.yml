@@ -1,0 +1,15 @@
+---
+- name: Initialize Docker Swarm
+  become: true
+  shell: "docker swarm init --advertise-addr={{ hostvars[inventory_hostname]['master_ip'] }} 2> /dev/null"
+  ignore_errors: True
+  
+- name: Get the Manager join-token
+  become: true
+  shell: docker swarm join-token --quiet manager
+  register: manager_token
+
+- name: Get the worker join-token
+  become: true
+  shell: docker swarm join-token --quiet worker
+  register: worker_token

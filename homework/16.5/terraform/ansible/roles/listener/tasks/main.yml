@@ -1,0 +1,20 @@
+
+- name: Log into private registry
+  become: true
+  community.docker.docker_login:
+    registry_url: cr.yandex
+    username: oauth
+    password: "{{ oauth_token }}"
+    reauthorize: false
+
+- name: Unarchive docker compose file from git
+  become: true
+  unarchive:
+    src: https://github.com/RedRatInTheHat/shvirtd-example-python/archive/refs/heads/main.zip
+    dest: /opt
+    remote_src: yes
+
+- name: Run project in swarm
+  become: true
+  shell: "docker stack deploy --compose-file /opt/shvirtd-example-python-main/docker-compose.yaml listener"
+  ignore_errors: True
