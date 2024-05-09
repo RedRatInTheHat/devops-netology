@@ -6,6 +6,14 @@
 3. Убедитесь, что в вашей ОС установлен docker.
 4. Зарегистрируйте аккаунт на сайте https://hub.docker.com/, выполните команду docker login и введите логин, пароль.
 
+![alt text](images/17.1.0.1.png)
+
+![alt text](images/17.1.0.2.png)
+
+![alt text](images/17.1.0.3.png)
+
+![alt text](images/17.1.0.4.png)
+
 
 ### Задание 1
 
