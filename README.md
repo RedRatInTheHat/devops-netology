@@ -17,3 +17,4 @@
 * [16.3 Оркестрация группой Docker контейнеров на примере Docker Compose](homework/16.3/README.md)
 * [16.4 Практическое применение Docker](homework/16.4/README.md)
 * [16.5 Оркестрация кластером Docker контейнеров на примере Docker Swarm.](homework/16.5/README.md)
+* [17.1 Введение в Terraform](homework/17.1/README.md)
