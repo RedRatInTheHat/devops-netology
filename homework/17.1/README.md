@@ -30,6 +30,86 @@
 
 #### Решение 1
 
+1. Проект инициализирован; при этом были загружены необходимые плагины:
+
+![alt text](images/17.2.1.1.png)
+
+2. Судя по `.gitignore` секретными файлами считаются:
+* файлы директории `.terraform`, где бы она ни находилась;
+* любые файлы с названиями, начинающимися на `.terraform*`, кроме конфигурационного файла `.terraformrc`.
+* файлы состояния `.tfstate`
+* в данном случае, пользователям для переменных выделен файл `personal.auto.tfvars`.
+
+3. В файле `terraform.tfstate` под ключом `resources.instances.attributes.result` находим значение `eHJbtxPXcoVQ7lvs`.
+
+4. Terraform говорит нам, что мы всюду неправы и нейминг у нас так себе. Ну что же, он прав:
+* блок ресурсов должен иметь две метки, тип и название. А уж какое там должно быть имя, видно из следующего ресурса;
+* имя должно начинаться с буквы, а вот дальше уже можно и буквы, и цифры, и нижнее подчёркивание, и тире;
+* в ресурсе `docker_container.nginx` происходит обращение к ресурсу `random_password` с несуществующим именем, а затем по несуществующему ключу.
+
+Исправляем:
+
+```hcl
+resource "docker_image" "nginx" {
+  name         = "nginx:latest"
+  keep_locally = true
+}
+
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.image_id
+  name  = "example_${random_password.random_string.result}"
+
+  ports {
+    internal = 80
+    external = 9090
+  }
+}
+```
+
+5. Запускаем. Проверяем docker:
+
+![alt text](images/17.2.1.2.png)
+
+Поднялось.
+
+6. Меняем имя. Контейнер пересоздался с другим именем:
+
+![alt text](images/17.2.1.3.png)
+
+Чем гуглить или гадать, веселее попробовать иначе. При сравнении вывода обнаруживается отсутствие следующей строки:
+
+```
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+```
+
+Слона-то я и не заметила.<br/>
+Выходит, что при `auto-approve` terraform не спрашивает нас, а уверены ли мы в том, что вот эти результаты выше нам действительно нужны. Так можно пропустить нежелательные действия, но зато, если мы в себе уверены, эта опция будет назаменима при автоматизации процессов.
+
+7. Уничтожаем ресурсы. В terraform.tfstate теперь пусто и грустно:
+
+```
+{
+  "version": 4,
+  "terraform_version": "1.5.3",
+  "serial": 17,
+  "lineage": "061ca6c4-7096-72de-e6bb-514f665c8aa7",
+  "outputs": {},
+  "resources": [],
+  "check_results": null
+}
+```
+
+8. `nginx:latest` при этом не удалён, несмотря на уничтожение ресурса `"docker_image.nginx"`. В ресурсе не так-то много настроек, так что под подозрением `keep_locally = true`, у которого и название характерное.
+
+И действительно:<br/>
+`keep_locally (Boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation.`
+
+При `keep_locally = true` уничтожение ресурса не приводит к удалению docker-образа.
+
 ------
 
 ## Дополнительное задание (со звёздочкой*)
