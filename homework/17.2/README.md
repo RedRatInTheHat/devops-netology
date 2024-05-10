@@ -66,6 +66,17 @@
 2. Скопируйте блок ресурса и создайте с его помощью вторую ВМ в файле main.tf: **"netology-develop-platform-db"** ,  ```cores  = 2, memory = 2, core_fraction = 20```. Объявите её переменные с префиксом **vm_db_** в том же файле ('vms_platform.tf').  ВМ должна работать в зоне "ru-central1-b"
 3. Примените изменения.
 
+#### Решение 3
+
+Создан файл [vms_platform.tf](terraform/vms_platform.tf).
+
+Для создания виртуальной машины `netology-develop-platform-db` в зоне `ru-central1-b` было применено небольшое жульничество. В файле [main.tf](terraform/main.tf) добавлена подсеть `develop-db` с той же зоной; переменные для описания подсети добавлены в [variables.tf](terraform/variables.tf).
+
+Виртуальная машина создана:
+
+![alt text](images/17.2.3.1.png)
+
+---
 
 ### Задание 4
 
