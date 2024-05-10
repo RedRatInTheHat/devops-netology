@@ -173,6 +173,15 @@
 
 В качестве решения предоставьте необходимые команды и их вывод.
 
+#### Решение 7
+
+1. `local.test_list[1]` = "staging"
+2. `length(local.test_list)` = 3
+3. `local.test_map.admin` = "John"
+4. `"${local.test_map.admin} is ${keys(local.test_map)[0]} for ${local.test_list[2]} server based on OS ${local.servers[local.test_list[2]].image} with ${local.servers[local.test_list[2]].cpu} vcpu, ${local.servers[local.test_list[2]].ram} ram and ${length(local.servers[local.test_list[2]].disks)} disks."` = "John is admin for production server based on OS ubuntu-20-04 with 10 vcpu, 40 ram and 4 disks."
+
+![alt text](images/17.2.7.1.png)
+
 ------
 
 ### Задание 8*
