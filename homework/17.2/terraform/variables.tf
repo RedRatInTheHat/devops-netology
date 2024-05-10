@@ -72,3 +72,23 @@ variable "test" {
   ]
   description   = "Variable for 17.2.8"
 }
+
+# NAT variables
+
+variable "gateway_name" {
+  type        = string
+  default     = "nat"
+  description = "Gateway name"
+}
+
+variable "route_table_name" {
+  type        = string
+  default     = "route_table"
+  description = "Route table name"
+}
+
+variable "destination_prefix" {
+  type        = string
+  default     = "0.0.0.0/0"
+  description = "Route prefix in CIDR notation."
+}

@@ -44,7 +44,7 @@ variable "vm_web_is_preemptible" {
 
 variable "vm_web_has_nat" {
   type        = bool
-  default     = true
+  default     = false
   description = "Is a public address provided."
 }
 
@@ -106,7 +106,7 @@ variable "vm_db_is_preemptible" {
 
 variable "vm_db_has_nat" {
   type        = bool
-  default     = true
+  default     = false
   description = "Is a public address provided."
 }
 

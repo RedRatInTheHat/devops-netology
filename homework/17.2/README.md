@@ -228,3 +228,19 @@ test = [
 В качестве результата прикрепите ссылку на MD файл с описанием выполненой работы в вашем репозитории. Так же в репозитории должен присутсвовать ваш финальный код проекта.
 
 **Важно. Удалите все созданные ресурсы**.
+
+#### Решение 9
+
+В файл [main.tf](terraform/main.tf) добавлены ресурсы `yandex_vpc_gateway` и `yandex_vpc_route_table`; для подсетей подключена созданная таблица маршрутизации; в [variables.tf](terraform/variables.tf) вынесены новые значения.
+
+В [vms_platform.tf](terraform/vms_platform.tf) отключен NAT для виртуальных машин.
+
+Для пользователя `ubuntu` задан пароль.
+
+Изменения внесены:
+
+![alt text](images/17.2.9.0.png)
+
+Подключаемся к первой виртуальной машине (`yc compute connect-to-serial-port --instance-name netology-develop-platform-db-ru-central1-b --ssh-key ~/.ssh/id_ed25519 --folder-id <folder_id>`). Доступ в интернет есть:
+
+![alt text](images/17.2.9.1.png)
