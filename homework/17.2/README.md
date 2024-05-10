@@ -85,6 +85,13 @@
 
 В качестве решения приложите вывод значений ip-адресов команды ```terraform output```.
 
+#### Решение 4
+
+В файл [outputs.tf](terraform/outputs.tf) добавлен `vm_info`:
+
+![alt text](images/17.2.4.1.png)
+
+---
 
 ### Задание 5
 
