@@ -40,8 +40,8 @@ variable "vpc_name" {
 
 ### ssh vars
 
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL44om5P+zHY7iA+u+VUKYspMpmyQul66wp7ul+8vEtb redrat@redrat-All-Series"
-  description = "ssh-keygen -t ed25519"
-}
+# variable "vms_ssh_root_key" {
+#   type        = string
+#   default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL44om5P+zHY7iA+u+VUKYspMpmyQul66wp7ul+8vEtb redrat@redrat-All-Series"
+#   description = "ssh-keygen -t ed25519"
+# }
