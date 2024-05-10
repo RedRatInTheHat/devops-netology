@@ -45,3 +45,30 @@ variable "vpc_name" {
 #   default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL44om5P+zHY7iA+u+VUKYspMpmyQul66wp7ul+8vEtb redrat@redrat-All-Series"
 #   description = "ssh-keygen -t ed25519"
 # }
+
+### test variable
+
+variable "test" {
+  type          = list(map(list(string)))
+  default       = [
+    {
+      "dev1" = [
+        "ssh -o 'StrictHostKeyChecking=no' ubuntu@62.84.124.117",
+        "10.0.1.7",
+      ]
+    },
+    {
+      "dev2" = [
+        "ssh -o 'StrictHostKeyChecking=no' ubuntu@84.252.140.88",
+        "10.0.2.29",
+      ]
+    },
+    {
+      "prod1" = [
+        "ssh -o 'StrictHostKeyChecking=no' ubuntu@51.250.2.101",
+        "10.0.1.30",
+      ]
+    },
+  ]
+  description   = "Variable for 17.2.8"
+}

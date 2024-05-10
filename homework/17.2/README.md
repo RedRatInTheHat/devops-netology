@@ -209,7 +209,14 @@ test = [
 ]
 ```
 2. Напишите выражение в terraform console, которое позволит вычленить строку "ssh -o 'StrictHostKeyChecking=no' ubuntu@62.84.124.117"
-------
+
+#### Решение 8
+
+Переменная создана в файле [variables.tf](terraform/variables.tf).
+
+Для получения нужного значения выполняем запрос `var.test[0].dev1[0]`:
+
+![alt text](images/17.2.8.1.png)
 
 ------
 
