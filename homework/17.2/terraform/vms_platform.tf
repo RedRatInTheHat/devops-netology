@@ -48,11 +48,17 @@ variable "vm_web_has_nat" {
   description = "Is a public address provided."
 }
 
-variable "vm_web_has_access_to_console" {
-  type        = number
-  default     = 1
-  description = "Is access to serial console enabled (0/1)"
-}
+# variable "vm_web_has_access_to_console" {
+#   type        = number
+#   default     = 1
+#   description = "Is access to serial console enabled (0/1)"
+# }
+
+# variable "vm_web_instance_user" {
+#   type        = string
+#   default     = "ubuntu"
+#   description = "Virtual machine user"
+# }
 
 # variables for yandex_compute_instance.netology-develop-platform-db
 
@@ -104,11 +110,17 @@ variable "vm_db_has_nat" {
   description = "Is a public address provided."
 }
 
-variable "vm_db_has_access_to_console" {
-  type        = number
-  default     = 1
-  description = "Is access to serial console enabled (0/1)"
-}
+# variable "vm_db_has_access_to_console" {
+#   type        = number
+#   default     = 1
+#   description = "Is access to serial console enabled (0/1)"
+# }
+
+# variable "vm_db_instance_user" {
+#   type        = string
+#   default     = "ubuntu"
+#   description = "Virtual machine user"
+# }
 
 variable "vm_db_zone" {
   type        = string
