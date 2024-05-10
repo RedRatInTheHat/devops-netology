@@ -119,7 +119,7 @@ variable "vm_db_zone" {
 # virual machine
 
 resource "yandex_compute_instance" "netology-develop-platform-db" {
-  name        = var.vm_db_instance_name
+  name        = local.vm_db_name
   platform_id = var.vm_db_platform_id
   zone        = var.vm_db_zone
   resources {
