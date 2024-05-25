@@ -42,6 +42,28 @@ variable "each_vm" {
 
 #### Решение 2
 
+Для web ВМ добавлен файл [count-vm.tf](terraform/count-vm.tf).<br/>
+Для db ВМ добавлен файл [for_each-vm.tf](terraform/for_each-vm.tf)
+
+Переменные объявляются в [variables.tf](terraform/variables.tf) и инициализируются в [variables.auto.tfvars](terraform/variables.auto.tfvars).<br/>
+Имя, CPU, RAM, размер диска и core fraction вынесены в специфичные для каждого типа инстансов переменные; остальные переменные являются общими.<br/>
+В целях отладки и экономии ради добавлены переменные для `allow_stopping_for_update`, `scheduling_policy.preemptible`, `network_interface.nat` и ранее упоминавшегося `resources.core_fraction`.
+
+Переменная `metadata` вынесена в файл [locals.tf](terraform/locals.tf).
+
+Созданные web ВМ:
+
+![alt text](images/2.1.png)
+
+Группы безопасности web ВМ (на примере одной из них):
+
+![alt text](images/2.2.png)
+
+Созданные db ВМ:
+
+![alt text](images/2.3.png)
+
+
 ---
 
 ### Задание 3
