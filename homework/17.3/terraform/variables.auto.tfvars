@@ -30,7 +30,8 @@ each_vm = [
 ]
 
 storage_disks_count = 3
-storage_disk_name = "storage-disk"
-storage_disk_size = 1
+storage_disk_name   = "storage-disk"
+storage_disk_size   = 1
 
 vm_storage_instance_name = "storage"
+vm_storage_has_nat       = false

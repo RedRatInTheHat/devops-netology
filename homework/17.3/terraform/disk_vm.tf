@@ -30,7 +30,7 @@ resource "yandex_compute_instance" "storage" {
 
   network_interface {
     subnet_id           = yandex_vpc_subnet.develop.id
-    nat                 = var.vm_has_nat
+    nat                 = var.vm_storage_has_nat
   }
 
   dynamic "secondary_disk" {

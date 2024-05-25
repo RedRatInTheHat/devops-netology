@@ -12,4 +12,5 @@
 personal.auto.tfvars
 
 # ansible hosts file
-hosts
+hosts*
+!hosts.tftpl

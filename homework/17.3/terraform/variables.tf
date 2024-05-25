@@ -102,6 +102,11 @@ variable "storage_disk_size" {
 # storage instance info
 
 variable "vm_storage_instance_name" {
-  type = string
+  type        = string
   description = "Name of storage virtual machine"
+}
+
+variable "vm_storage_has_nat" {
+  type        = bool
+  description = "Is a public address provided for storage instance"
 }
