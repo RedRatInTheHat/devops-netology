@@ -1,12 +1,16 @@
-resource "yandex_compute_instance" "web" {
-  count                     = var.vm_web_count
-  name                      = "${var.vm_web_instance_name}-${count.index + 1}"
+resource "yandex_compute_disk" "storage_disk" {
+  count     = var.storage_disks_count
+
+  name      = "${var.storage_disk_name}-${count.index}"
+  zone      = var.default_zone
+  size      = var.storage_disk_size
+}
+
+resource "yandex_compute_instance" "storage" {
+  name                      = var.vm_storage_instance_name
   allow_stopping_for_update = var.vm_allow_stopping_for_update
-  depends_on                = [ yandex_compute_instance.db ]
 
   platform_id = var.vm_platform_id
-
-  metadata = local.metadata
 
   resources {
     cores         = var.vm_resources.cores
@@ -27,6 +31,12 @@ resource "yandex_compute_instance" "web" {
   network_interface {
     subnet_id           = yandex_vpc_subnet.develop.id
     nat                 = var.vm_has_nat
-    security_group_ids  = [ yandex_vpc_security_group.example.id ]
+  }
+
+  dynamic "secondary_disk" {
+    for_each = yandex_compute_disk.storage_disk
+    content {
+        disk_id = lookup(secondary_disk.value, "id", null)
+    }
   }
 }

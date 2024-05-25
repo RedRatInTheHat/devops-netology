@@ -58,6 +58,11 @@ variable "vm_allow_stopping_for_update" {
   description = "Is it allowed to stop a VM instance to make changes"
 }
 
+variable "vm_resources" {
+  type        = object({ cores=number, memory=number, core_fraction=number })
+  description = "Resources for instances"
+}
+
 # web instances info
 
 variable "vm_web_count" {
@@ -70,14 +75,33 @@ variable "vm_web_instance_name" {
   description = "Name of created virtual machine."
 }
 
-variable "vm_web_resources" {
-  type        = object({ cores=number, memory=number, core_fraction=number })
-  description = "Resources for instances"
-}
-
 # db instances info
 
 variable "each_vm" {
   type        = list(object({  vm_name=string, cpu=number, ram=number, disk_volume=number, core_fraction=number }))
   description = "Parameters for database instances"
+}
+
+# disks info
+
+variable "storage_disks_count" {
+  type        = number
+  description = "Number of storage vm disks"
+}
+
+variable "storage_disk_name" {
+  type        = string
+  description = "Name of storage vm disk"
+}
+
+variable "storage_disk_size" {
+  type        = number
+  description = "Storage vm disk size in GB"
+}
+
+# storage instance info
+
+variable "vm_storage_instance_name" {
+  type = string
+  description = "Name of storage virtual machine"
 }
