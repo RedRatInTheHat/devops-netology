@@ -11,7 +11,9 @@ ${instance["name"]}   ansible_host=${instance["network_interface"][0]["nat_ip_ad
 %{ endfor ~}
 
 [storage]
-${yandex_compute_instance.storage.name}  ansible_host=${yandex_compute_instance.storage.network_interface[0].nat_ip_address}  fqdn=${yandex_compute_instance.storage.fqdn}
+%{ for instance in [yandex_compute_instance.storage] ~}
+${instance["name"]}   ansible_host=${instance["network_interface"][0]["nat_ip_address"]}  fqdn=${instance["fqdn"]}
+%{ endfor ~}
 
   EOT
   filename = "${abspath(path.module)}/hosts"
@@ -19,10 +21,12 @@ ${yandex_compute_instance.storage.name}  ansible_host=${yandex_compute_instance.
 
 resource "local_file" "hosts_cfg" {
   content = templatefile("${path.module}/hosts.tftpl",
-  { 
-    webservers = yandex_compute_instance.web, 
-    databases  = yandex_compute_instance.db,
-    storage    = yandex_compute_instance.storage
+  {
+    instances = {
+      webservers = yandex_compute_instance.web, 
+      databases  = yandex_compute_instance.db,
+      storage    = [yandex_compute_instance.storage]
+    }
   })
 
   filename = "${abspath(path.module)}/hosts.cfg"

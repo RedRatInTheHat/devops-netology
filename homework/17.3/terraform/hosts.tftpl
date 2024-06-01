@@ -1,12 +1,7 @@
-[webservers]
-%{ for instance in webservers ~}
+%{ for instance_group_name, instance_group in instances ~}
+[${instance_group_name}]
+%{ for instance in instance_group ~}
 ${instance["name"]}   ansible_host=${instance["network_interface"][0]["nat_ip_address"] != "" ? instance["network_interface"][0]["nat_ip_address"] : instance["network_interface"][0]["ip_address"]} fqdn=${instance["fqdn"]}
 %{ endfor ~}
 
-[databases]
-%{ for instance in databases ~}
-${instance["name"]}   ansible_host=${instance["network_interface"][0]["nat_ip_address"] != "" ? instance["network_interface"][0]["nat_ip_address"] : instance["network_interface"][0]["ip_address"]} fqdn=${instance["fqdn"]}
 %{ endfor ~}
-
-[storage]
-${storage.name}  ansible_host=${storage.network_interface[0].nat_ip_address != "" ? storage.network_interface[0].nat_ip_address : storage.network_interface[0].ip_address }  fqdn=${storage.fqdn}
