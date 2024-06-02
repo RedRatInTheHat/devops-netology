@@ -45,6 +45,22 @@ module "vpc_dev" {
 }
 ```
 
+#### Решение 2
+
+Из [main.tf](terraform/main.tf) убрано создание сети, добавлен вызов модуля `vpc_dev`.</br>
+Создан модуль, сеть описана в [vpc.tf](terraform/vpc/vpc.tf), аргументы описаны в [variables.tf](terraform/vpc/variables.tf), необходимые возвращаемые значения и информация о созданной подсети – в [outputs.tf](terraform/vpc/outputs.tf).
+
+Итого модуль возвращает:
+
+![alt text](images/2.1.png)
+
+С помощью `terraform-docs` сформирована [документация к модулю vpc](terraform/terraform-docs/vpc.md):
+```shell
+docker run --rm --volume "$(pwd):/terraform-docs" -u $(id -u) quay.io/terraform-docs/terraform-docs:0.16.0 markdown /terraform-docs > ../terraform-docs/vpc.md
+```
+
+---
+
 ### Задание 3
 1. Выведите список ресурсов в стейте.
 2. Полностью удалите из стейта модуль vpc.
