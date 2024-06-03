@@ -1,8 +1,10 @@
 module "vpc_dev" {
   source = "./vpc"
   vpc_name = "develop"
-  vpc_zone = "ru-central1-a"
-  vpc_cidr = ["10.0.1.0/24"]
+  vpc_subnets = [
+    { vpc_zone = "ru-central1-a", vpc_cidr = "10.0.1.0/24" },
+    { vpc_zone = "ru-central1-b", vpc_cidr = "10.0.2.0/24" },
+  ]
 }
 
 
@@ -11,7 +13,7 @@ module "marketing_vm" {
   env_name       = "marketing"
   network_id     = module.vpc_dev.network_id
   subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.vpc_dev.subnet_id]
+  subnet_ids     = [module.vpc_dev.subnet_ids[0]]
   instance_name  = "marketing"
   instance_count = 1
   image_family   = "ubuntu-2004-lts"
@@ -29,7 +31,7 @@ module "analytics_vm" {
   env_name       = "analytics"
   network_id     = module.vpc_dev.network_id
   subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.vpc_dev.subnet_id]
+  subnet_ids     = [module.vpc_dev.subnet_ids[0]]
   instance_name  = "analytics"
   instance_count = 1
   image_family   = "ubuntu-2004-lts"

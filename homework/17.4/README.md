@@ -121,6 +121,22 @@ module "vpc_dev" {
 
 Предоставьте код, план выполнения, результат из консоли YC.
 
+---
+
+#### Решение 4
+
+В [variables.tf](terraform/vpc/variables.tf) и [outputs.tf](terraform/vpc/outputs.tf) адаптированы переменные, в [vpc.tf](terraform/vpc/vpc.tf) реализовано создание нескольких подсетей.
+
+В [main.tf](terraform/main.tf) изменены отправляемые в модуль сети значения и формат получения id подсети в модулях ВМ.
+
+План: [tfplan](terraform/tfplan)
+
+В консоли YC видим структуру следующего вида:
+
+![alt text](images/4.1.png)
+
+---
+
 ### Задание 5*
 
 1. Напишите модуль для создания кластера managed БД Mysql в Yandex Cloud с одним или несколькими(2 по умолчанию) хостами в зависимости от переменной HA=true или HA=false. Используйте ресурс yandex_mdb_mysql_cluster: передайте имя кластера и id сети.
