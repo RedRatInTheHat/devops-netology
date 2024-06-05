@@ -129,7 +129,7 @@ module "vpc_dev" {
 
 В [main.tf](terraform/main.tf) изменены отправляемые в модуль сети значения и формат получения id подсети в модулях ВМ.
 
-План: [tfplan](terraform/tfplan)
+План: [tfplan](terraform/plans/tfplan_4)
 
 В консоли YC видим структуру следующего вида:
 
@@ -143,6 +143,40 @@ module "vpc_dev" {
 2. Напишите модуль для создания базы данных и пользователя в уже существующем кластере managed БД Mysql. Используйте ресурсы yandex_mdb_mysql_database и yandex_mdb_mysql_user: передайте имя базы данных, имя пользователя и id кластера при вызове модуля.
 3. Используя оба модуля, создайте кластер example из одного хоста, а затем добавьте в него БД test и пользователя app. Затем измените переменную и превратите сингл хост в кластер из 2-х серверов.
 4. Предоставьте план выполнения и по возможности результат. Сразу же удаляйте созданные ресурсы, так как кластер может стоить очень дорого. Используйте минимальную конфигурацию.
+
+---
+
+#### Решение 5
+
+Для создания кластера создан модуль mysql-cluster:
+* [mysql-cluster.tf](terraform/mysql-cluster/mysql-cluster.tf)
+* [variables.tf](terraform/mysql-cluster/variables.tf)
+* [outputs.tf](terraform/mysql-cluster/outputs.tf)
+
+Для создания БД и пользователя создан модуль mysql-db:
+* [mysql-db.tf](terraform/mysql-db/mysql-db.tf)
+* [variables.tf](terraform/mysql-db/variables.tf)
+
+План для создания кластера `example` из одного хоста: [tfplan](terraform/plans/tfplan_5_1).<br/>
+Поднимаем:
+
+![alt text](images/5.1.png)
+
+Добавляем базу данных и пользователя.<br/>
+План: [tfplan](terraform/plans/tfplan_5_2)<br/>
+Результат:
+
+![alt text](images/5.2.png)
+
+Теперь передаём `is_HA=true`, превращая это всё в нечто более похожее на кластер.<br/>
+План: [tfplan](terraform/plans/tfplan_5_3)<br/>
+Результат:
+
+![alt text](images/5.3.png)
+
+Видны оба кластера; второй занял позицию реплики.
+
+---
 
 ### Задание 6*
 1. Используя готовый yandex cloud terraform module и пример его вызова(examples/simple-bucket): https://github.com/terraform-yc-modules/terraform-yc-s3 .
