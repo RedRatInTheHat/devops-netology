@@ -182,6 +182,20 @@ module "vpc_dev" {
 1. Используя готовый yandex cloud terraform module и пример его вызова(examples/simple-bucket): https://github.com/terraform-yc-modules/terraform-yc-s3 .
 Создайте и не удаляйте для себя s3 бакет размером 1 ГБ(это бесплатно), он пригодится вам в ДЗ к 5 лекции.
 
+---
+
+#### Решение 6
+
+Чтобы не сорить всяческими зависимостями и не копаться со state, проект вынесен в директорию s3. Созданы файлы [main.tf](terraform/s3/main.tf), [s3.tf](terraform/s3/s3.tf), [variables.tf](terraform/s3/variables.tf).
+
+Создан bucket netology-bucket-<id>:
+
+![alt text](images/6.1.png)
+
+А заодно и storage-admin-<id>.
+
+---
+
 ### Задание 7*
 
 1. Разверните у себя локально vault, используя docker-compose.yml в проекте.
