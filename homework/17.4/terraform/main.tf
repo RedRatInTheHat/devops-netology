@@ -8,33 +8,35 @@ module "vpc_dev" {
   ]
 }
 
-# module "mysql_cluster" {
-#   source        = "./mysql-cluster"
+module "mysql_cluster" {
+  source        = "./mysql-cluster"
 
-#   cluster_name  = "example"
-#   network_id    = module.vpc_dev.network_id
-#   subnets       = module.vpc_dev.subnet_info
-#   is_HA         = true
-# }
+  cluster_name  = "example"
+  network_id    = module.vpc_dev.network_id
+  subnets       = module.vpc_dev.subnet_info
+  is_HA         = true
+  security_group_ids = [module.vpc_dev.security_group_id]
+}
 
-# module "mysql_db" {
-#   source = "./mysql-db"
+module "mysql_db" {
+  source = "./mysql-db"
 
-#   cluster_id  = module.mysql_cluster.cluster_id
-#   db_name     = "test"
-#   user_name   = "app"
-# }
+  cluster_id  = module.mysql_cluster.cluster_id
+  db_name     = "test"
+  user_name   = "app"
+}
 
 module "marketing_vm" {
-  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
-  env_name       = "marketing"
-  network_id     = module.vpc_dev.network_id
-  subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.vpc_dev.subnet_ids[0]]
-  instance_name  = "marketing"
-  instance_count = 1
-  image_family   = "ubuntu-2004-lts"
-  public_ip      = true
+  source             = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=289b559"
+  env_name           = "marketing"
+  network_id         = module.vpc_dev.network_id
+  subnet_zones       = ["ru-central1-a"]
+  subnet_ids         = [module.vpc_dev.subnet_ids[0]]
+  instance_name      = "marketing"
+  instance_count     = 1
+  image_family       = "ubuntu-2004-lts"
+  public_ip          = true
+  security_group_ids = [module.vpc_dev.security_group_id]
 
   metadata = {
     user-data          = data.template_file.cloudinit.rendered
@@ -44,15 +46,16 @@ module "marketing_vm" {
 }
 
 module "analytics_vm" {
-  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
-  env_name       = "analytics"
-  network_id     = module.vpc_dev.network_id
-  subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.vpc_dev.subnet_ids[0]]
-  instance_name  = "analytics"
-  instance_count = 1
-  image_family   = "ubuntu-2004-lts"
-  public_ip      = true
+  source             = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=289b559"
+  env_name           = "analytics"
+  network_id         = module.vpc_dev.network_id
+  subnet_zones       = ["ru-central1-a"]
+  subnet_ids         = [module.vpc_dev.subnet_ids[0]]
+  instance_name      = "analytics"
+  instance_count     = 1
+  image_family       = "ubuntu-2004-lts"
+  public_ip          = true
+  security_group_ids = [module.vpc_dev.security_group_id]
 
   metadata = {
     user-data          = data.template_file.cloudinit.rendered

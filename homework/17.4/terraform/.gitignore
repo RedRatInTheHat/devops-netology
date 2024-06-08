@@ -1,6 +1,7 @@
 # Local .terraform directories and files
 **/.terraform/*
 .terraform*
+.external_modules
 
 !.terraformrc
 
