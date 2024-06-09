@@ -18,6 +18,11 @@ variable "is_HA" {
   description = "Whether cluster consists of one or more (default 2) nodes"
 }
 
+variable "security_group_ids" {
+  type        = list(string)
+  description = "The security group ids"
+}
+
 variable "number_of_hosts" {
   type        = number
   default     = 2
