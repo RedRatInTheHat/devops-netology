@@ -19,3 +19,4 @@
 * [16.5 Оркестрация кластером Docker контейнеров на примере Docker Swarm.](homework/16.5/README.md)
 * [17.1 Введение в Terraform](homework/17.1/README.md)
 * [17.2 Основы работы с Terraform](homework/17.2/README.md)
+* [17.3 Управляющие конструкции в коде Terraform](homework/17.3/README.md)
