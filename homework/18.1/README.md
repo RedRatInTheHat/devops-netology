@@ -18,6 +18,54 @@
 
 ### Решение
 
+0. Добавлен файл [ansible.cfg](playbook/ansible.cfg), в котором безжалостно вырезаны коровки и скрыто предупреждение о неподоходящем интерпретаторе.
+
+1. Запускаем `site.yml` для `test.yml`.<br/>
+`some_fact` запускается в task'е `Print fact`. На данный момент отображается `12`. 
+
+![alt text](images/18.1.png)
+
+2. Значение определяется в `group_vars/all/exampl.yml`. Меняем. Успех:
+
+![alt text](images/18.2.png)
+
+3. После некоторых танцев с бубном подняты контейнеры с python нужной версии внутри:
+
+![alt text](images/18.3.png)
+
+4. `some_fact` в случае centos7 и ubuntu выдают "el" и "deb" соответственно, согласно своей группе и group_vars.
+
+![alt text](images/18.4.png)
+
+5. Вносим изменения в [deb](playbook/group_vars/deb/examp.yml) и [el](playbook/group_vars/el/examp.yml).
+
+6. Проверяем:
+
+![alt text](images/18.6.png)
+
+7. Шифруем:
+
+![alt text](images/18.7.png)
+
+8. Ansible запросил пароль и успешно запустился:
+
+![alt text](images/18.8.png)
+
+9. Как будто любой плагин подходит для contol node, достаточно указать localhost. Предположим, мы ищем нечто классическое, вроде `ping`:
+
+![alt text](images/18.9.png)
+
+Ну, или имеется в виду что-то из подключения, первый пункт из представленных, например. Поди пойми.
+
+![alt text](images/18.9.1.png)
+
+10. Вносим изменения в [prod.yml](playbook/inventory/prod.yml)
+
+11. Запускаем:
+
+![alt text](images/18.11.png)
+
+Для хоста `localhost` используется общее для всех хостов значение переменной "all default fact" из `all/examp.yml`.
 
 
 ---
