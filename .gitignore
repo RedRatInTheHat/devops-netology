@@ -2,6 +2,8 @@
 .vagrant
 variables.pkrvars.hcl
 
+.secret.txt
+
 # Local .terraform directories and files
 **/.terraform/*
 .terraform*
