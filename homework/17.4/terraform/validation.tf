@@ -9,16 +9,16 @@ variable "good_ip" {
 	}
 }
 
-variable "bad_ip" {
-    type        = string
-    default     = "1920.1680.0.1"
-    description = "ip-адрес"
+# variable "bad_ip" {
+#     type        = string
+#     default     = "1920.1680.0.1"
+#     description = "ip-адрес"
 
-    validation {
-		condition     = can(cidrhost("${var.bad_ip}/32", 0))
-		error_message = "Invalid ip-address."
-	}
-}
+#     validation {
+# 		condition     = can(cidrhost("${var.bad_ip}/32", 0))
+# 		error_message = "Invalid ip-address."
+# 	}
+# }
 
 variable "good_ips" {
     type        = list(string)
@@ -31,16 +31,16 @@ variable "good_ips" {
     }
 }
 
-variable "bad_ips" {
-    type        = list(string)
-    default     = ["192.168.0.1", "1.1.1.1", "1270.0.0.1"]
-    description = "список ip-адресов"
+# variable "bad_ips" {
+#     type        = list(string)
+#     default     = ["192.168.0.1", "1.1.1.1", "1270.0.0.1"]
+#     description = "список ip-адресов"
 
-    validation {
-        condition = alltrue([ for ip in var.bad_ips: can(cidrhost("${ip}/32", 0)) ])
-        error_message = "Given list contains one or more invalid ip-address."
-    }
-}
+#     validation {
+#         condition = alltrue([ for ip in var.bad_ips: can(cidrhost("${ip}/32", 0)) ])
+#         error_message = "Given list contains one or more invalid ip-address."
+#     }
+# }
 
 variable "lower_case_string" {
     type        = string
