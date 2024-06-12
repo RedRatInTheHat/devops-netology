@@ -8,17 +8,20 @@
         name: clickhouse-server
         state: restarted
   tasks:
-    - block:
+    - name: Install Clickhouse no matter what
+      block:
         - name: Get clickhouse distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
             dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+            mode: '0755'
           with_items: "{{ clickhouse_packages }}"
       rescue:
         - name: Get clickhouse distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
             dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+            mode: '0755'
     - name: Install clickhouse packages
       become: true
       ansible.builtin.yum:
@@ -29,11 +32,11 @@
         disable_gpg_check: true
       notify: Start clickhouse service
     - name: Flush handlers
-      meta: flush_handlers
+      ansible.builtin.meta: flush_handlers
     - name: Create database
       ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
       register: create_db
-      failed_when: create_db.rc != 0 and create_db.rc !=82
+      failed_when: create_db.rc != 0 and create_db.rc != 82
       changed_when: create_db.rc == 0
 
 - name: Install Vector
@@ -48,7 +51,7 @@
   tasks:
     - name: "Create group {{ vector_group }}"
       become: true
-      group:
+      ansible.legacy.group:
         name: "{{ vector_group }}"
         state: present
 
@@ -60,7 +63,7 @@
 
     - name: Make sure Vector directory exists
       become: true
-      file:
+      ansible.legacy.file:
         path: /etc/vector
         state: directory
         owner: "{{ vector_user }}"
@@ -68,7 +71,7 @@
 
     - name: Make sure var Vector directory exists
       become: true
-      file:
+      ansible.legacy.file:
         path: /var/lib/vector/
         state: directory
         owner: "{{ vector_user }}"
@@ -107,4 +110,5 @@
       ansible.builtin.template:
         src: templates/vector.yaml.j2
         dest: /etc/vector/vector.yaml
+        mode: '0755'
       notify: Restart and enable Vector service
