@@ -1,36 +1,25 @@
-module "vpc_dev" {
-  source = "./vpc"
+data "terraform_remote_state" "vpc" {
+  backend = var.backend_type
+  config  = {
+    endpoint  = var.yandex_endpoint
+    bucket    = var.bucket_name
+    region    = var.default_region
+    key       = var.tf_state_path
 
-  vpc_name = "develop"
-  vpc_subnets = [
-    { vpc_zone = "ru-central1-a", vpc_cidr = "10.0.1.0/24" },
-    { vpc_zone = "ru-central1-b", vpc_cidr = "10.0.2.0/24" },
-  ]
+    skip_region_validation      = var.skip_all
+    skip_credentials_validation = var.skip_all
+
+    access_key = var.access_key
+    secret_key = var.secret_key
+  }
 }
-
-# module "mysql_cluster" {
-#   source        = "./mysql-cluster"
-
-#   cluster_name  = "example"
-#   network_id    = module.vpc_dev.network_id
-#   subnets       = module.vpc_dev.subnet_info
-#   is_HA         = true
-# }
-
-# module "mysql_db" {
-#   source = "./mysql-db"
-
-#   cluster_id  = module.mysql_cluster.cluster_id
-#   db_name     = "test"
-#   user_name   = "app"
-# }
 
 module "marketing_vm" {
   source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
   env_name       = "marketing"
-  network_id     = module.vpc_dev.network_id
+  network_id     = data.terraform_remote_state.vpc.outputs.network_id
   subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.vpc_dev.subnet_ids[0]]
+  subnet_ids     = data.terraform_remote_state.vpc.outputs.subnet_ids
   instance_name  = "marketing"
   instance_count = 1
   image_family   = "ubuntu-2004-lts"
@@ -46,9 +35,9 @@ module "marketing_vm" {
 module "analytics_vm" {
   source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
   env_name       = "analytics"
-  network_id     = module.vpc_dev.network_id
+  network_id     = data.terraform_remote_state.vpc.outputs.network_id
   subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.vpc_dev.subnet_ids[0]]
+  subnet_ids     = data.terraform_remote_state.vpc.outputs.subnet_ids
   instance_name  = "analytics"
   instance_count = 1
   image_family   = "ubuntu-2004-lts"

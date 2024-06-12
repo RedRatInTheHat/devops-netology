@@ -6,14 +6,14 @@ terraform {
   }
   backend "s3" {
     endpoint = "https://storage.yandexcloud.net"
-    bucket = "netology-bucket-ryoxybgu"
+    bucket = "terraformer-ux3"
     region = "ru-central1"
-    key = "terraform.tfstate"
+    key = "terraform-vm.tfstate"
 
     skip_region_validation = true
     skip_credentials_validation = true
 
-    dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1g1dt98fnh20q8l0229/etnq3r3aoreujp9u77aq"
+    dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1g1dt98fnh20q8l0229/etneha6a7eqms28rl4li"
     dynamodb_table    = "tf-locks"
   }
   required_version = ">=0.13"
