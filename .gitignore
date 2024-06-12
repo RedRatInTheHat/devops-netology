@@ -19,3 +19,6 @@ variables.pkrvars.hcl
 
 # own secret vars store.
 personal.auto.tfvars
+
+# Ansible
+ansible.cfg
