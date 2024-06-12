@@ -2,11 +2,14 @@
 .vagrant
 variables.pkrvars.hcl
 
+# secret files
 .secret.txt
+.meta.yml
 
 # Local .terraform directories and files
 **/.terraform/*
 .terraform*
+.external_modules
 
 !.terraformrc
 
