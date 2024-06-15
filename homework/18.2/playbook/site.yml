@@ -112,3 +112,58 @@
         dest: /etc/vector/vector.yaml
         mode: '0755'
       notify: Restart and enable Vector service
+
+- name: Install and configure Nginx
+  hosts: lighthouse
+  handlers:
+    - name: Restart and enable Nginx service
+      become: true
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
+        enabled: true
+  tasks:
+    - name: Install Nginx
+      become: true
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+
+    - name: Copy nginx.conf
+      become: true
+      ansible.builtin.template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+        owner: root
+        group: root
+        mode: '0755'
+      notify: Restart and enable Nginx service
+
+
+- name: Install and configure Lighthouse
+  hosts: lighthouse
+  handlers:
+    - name: Apply new SELinux file context to filesystem
+      become: true
+      ansible.builtin.command: "restorecon -irv {{ lighthouse_directory }}"
+  tasks:
+    - name: Install dependencies
+      become: true
+      ansible.builtin.yum:
+        name: git
+        state: present
+
+    - name: Download Lighthouse
+      become: true
+      ansible.builtin.git:
+        repo: "{{ lighthouse_repository }}"
+        dest: "{{ lighthouse_directory }}"
+        version: "{{ lighthouse_version }}"
+
+    - name: "Allow nginx to modify files in {{ lighthouse_directory }}"
+      become: true
+      community.general.sefcontext:
+        target: "'{{ lighthouse_directory }}(/.*)?'"
+        setype: httpd_sys_rw_content_t
+        state: present
+      notify: Apply new SELinux file context to filesystem
