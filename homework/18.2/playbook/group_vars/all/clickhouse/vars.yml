@@ -4,7 +4,3 @@ clickhouse_packages:
   - clickhouse-client
   - clickhouse-server
   - clickhouse-common-static
-
-vector_version: "0.38.0"
-vector_user: "vector"
-vector_group: "vector"

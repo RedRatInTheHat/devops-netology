@@ -1,5 +1,9 @@
 ---
-clickhouse:
+all:
   hosts:
-    clickhouse-01:
-      ansible_host: ${ vm_public_ip }
+    %{~ for instance_group_name, instance_ip in vm_public_ips ~}
+    ${ instance_group_name }:
+      ansible_host: ${ instance_ip }
+    %{~ endfor ~}
+    
+    

@@ -40,7 +40,7 @@
       changed_when: create_db.rc == 0
 
 - name: Install Vector
-  hosts: clickhouse
+  hosts: vector
   handlers:
     - name: Restart and enable Vector service
       become: true
