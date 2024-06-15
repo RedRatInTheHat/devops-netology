@@ -23,3 +23,5 @@
 * [17.4 Продвинутые методы работы с Terraform](homework/17.4/README.md)
 * [17.5 Использование Terraform в команде](homework/17.5/README.md)
 * [18.1 Введение в Ansible](homework/18.1/README.md)
+* [18.2 Работа с Playbook](homework/18.2/README.md)
+* [18.3 Использование Ansible](homework/18.3/README.md)

@@ -36,4 +36,4 @@
 
 ![alt text](images/2.png)
 
-
+Обновлено описание в [README.md](../18.2/playbook/README.md).
