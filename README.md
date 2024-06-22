@@ -25,3 +25,4 @@
 * [18.1 Введение в Ansible](homework/18.1/README.md)
 * [18.2 Работа с Playbook](homework/18.2/README.md)
 * [18.3 Использование Ansible](homework/18.3/README.md)
+* [18.4 Работа с roles](homework/18.4/README.md)
