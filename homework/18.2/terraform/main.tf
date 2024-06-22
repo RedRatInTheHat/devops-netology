@@ -10,7 +10,7 @@ module "vpc" {
 module "clickhouse_vm" {
   source                    = "git::https://github.com/RedRatInTheHat/simple-vms.git?ref=1bf63b4"
 
-  image_family              = "fedora-35"
+  image_family              = "ubuntu-2204-lts"
   instances_count           = 1
   instance_name             = "clickhouse"
   allow_stopping_for_update = true
