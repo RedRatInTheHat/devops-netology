@@ -8,3 +8,8 @@
   scm: git
   version: "v0.1.0"
   name: vector-role
+
+- src: git@github.com:RedRatInTheHat/lighthouse-role.git
+  scm: git
+  version: "v0.2.0"
+  name: lighthouse-role
