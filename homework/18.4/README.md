@@ -33,3 +33,15 @@
 
 ### Решение
 
+Добавлен файл [requirements.yml](../18.2/playbook/requirements.yml).<br/>
+По нему скачана роль ClickHouse – проект автоматически добавлен в директорию `roles`.<br/>
+После некоторых танцев с бубном выяснилось, что проще сменить систему, чем подобрать нужный микс значений переменных, так что [была сменена оперционная система машины с ClickHouse](../18.2/terraform/main.tf).
+
+Vector перенесён в директорию https://github.com/RedRatInTheHat/vector-role.
+
+Lighthouse был вынесен в https://github.com/RedRatInTheHat/lighthouse-role.
+
+Сам Nginx оставлен в виде task'и, как намекает фраза `возможности совмещения roles с tasks`. <br/>
+Таким образом, зависимость Lighthouse от Nginx была оформлена не в виде `dependencies` от роли `nginx`, а простой проверкой наличия сервиса.
+
+
