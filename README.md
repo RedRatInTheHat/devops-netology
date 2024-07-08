@@ -27,3 +27,4 @@
 * [18.3 Использование Ansible](homework/18.3/README.md)
 * [18.4 Работа с roles](homework/18.4/README.md)
 * [18.5 Тестирование roles](homework/18.5/README.md)
+* [18.6 Создание собственных модулей](homework/18.6/README.md)
