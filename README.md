@@ -28,3 +28,4 @@
 * [18.4 Работа с roles](homework/18.4/README.md)
 * [18.5 Тестирование roles](homework/18.5/README.md)
 * [18.6 Создание собственных модулей](homework/18.6/README.md)
+* [19.1 Жизненный цикл ПО](homework/19.1/README.md)
