@@ -174,6 +174,52 @@ if __name__ == '__main__':
 
 **Шаг 17.** В ответ необходимо прислать ссылки на collection и tar.gz архив, а также скриншоты выполнения пунктов 4, 6, 15 и 16.
 
+---
+
+### Решение
+
+Добавляем базовую структуру для создания файлов:
+* проверяется существовании директории;
+* проверяется право на запись;
+* если файл уже существует, проверяется его содержимое;
+* создаётся файл.
+
+Права на файл не задаются, так как в задании не указано дополнительных переменных.
+
+Проверяем на локальной машине:
+
+![alt text](images/1.png)
+
+Скрипт перемещён в `library`, добавлен playbook с содержимым:
+
+```yml
+---
+- name: Create file
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create file
+      my_own_module:
+        path: /tmp/file.txt
+        content: "There is nothing here."
+```
+
+Запускаем на локальной машине:
+
+![alt text](images/2.png)
+
+Из всего этого добра создаётся коллекция: https://github.com/RedRatInTheHat/my_own_collection/tree/1.0.0 и пакуется в архив: https://github.com/RedRatInTheHat/my_own_collection/blob/main/collection_test/my_own_namespace-yandex_cloud_logger-1.0.0.tar.gz
+
+Теперь архив может быть использован для установки коллекции:
+
+![alt text](images/3.png)
+
+Проверяем работу плейбука, который использует созданную роль и модуль напрямую (https://github.com/RedRatInTheHat/my_own_collection/blob/main/collection_test/playbook.yml):
+
+![alt text](images/4.png)
+
+---
+
 ## Необязательная часть
 
 1. Реализуйте свой модуль для создания хостов в Yandex Cloud.
@@ -182,3 +228,5 @@ if __name__ == '__main__':
 4. Протестируйте модуль на идемпотентность, исполнимость. При успехе добавьте этот модуль в свою коллекцию.
 5. Измените playbook так, чтобы он умел создавать инфраструктуру под inventory, а после устанавливал весь ваш стек Observability на нужные хосты и настраивал его.
 6. В итоге ваша коллекция обязательно должна содержать: clickhouse-role (если есть своя), lighthouse-role, vector-role, два модуля: my_own_module и модуль управления Yandex Cloud хостами и playbook, который демонстрирует создание Observability стека.
+
+#TODO
