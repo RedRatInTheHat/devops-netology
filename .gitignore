@@ -22,3 +22,6 @@ personal.auto.tfvars
 
 # Ansible
 ansible.cfg
+
+# SonarQube
+.scannerwork
