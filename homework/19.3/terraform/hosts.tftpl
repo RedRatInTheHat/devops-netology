@@ -1,0 +1,22 @@
+---
+all:
+  hosts:
+    sonar-01:
+      ansible_host: ${ vm_public_ips["sonar"] }
+    nexus-01:
+      ansible_host: ${ vm_public_ips["nexus"] }
+  children:
+    sonarqube:
+      hosts:
+        sonar-01:
+    nexus:
+      hosts:
+        nexus-01:
+    postgres:
+      hosts:
+        sonar-01:
+  vars:
+    ansible_connection_type: paramiko
+    ansible_user: ansibler
+    
+    
