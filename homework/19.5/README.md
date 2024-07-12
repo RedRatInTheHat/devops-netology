@@ -47,7 +47,7 @@
 
 ![alt text](images/3.png)
 
-Файл [pom.xml](https://github.com/RedRatInTheHat/example-teamcity/blob/master/pom.xml) изменён для загрузки артефакта на стадии deploy (в файле [settings.xml](files/settings.xml) указаны параметры для входа).
+Файл [pom.xml](https://github.com/RedRatInTheHat/example-teamcity/blob/master/pom.xml) изменён для загрузки артефакта на стадии deploy (в файле [settings.xml](files/settings.xml) указаны параметры для входа; файл с чувствительной информацией публикуется исключительно ввиду тестовой природы Nexus).
 
 Настроены два шага: `maven clean deploy` и `maven clean test`, запускающиеся в зависимости от используемой ветки:
 
