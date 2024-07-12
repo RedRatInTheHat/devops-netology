@@ -40,3 +40,30 @@
 17. Проведите повторную сборку мастера, убедитесь, что сбора прошла успешно и артефакты собраны.
 18. Проверьте, что конфигурация в репозитории содержит все настройки конфигурации из teamcity.
 19. В ответе пришлите ссылку на репозиторий.
+
+### Решение
+
+Запуск первой сборки прошёл успешно:
+
+![alt text](images/3.png)
+
+Файл [pom.xml](https://github.com/RedRatInTheHat/example-teamcity/blob/master/pom.xml) изменён для загрузки артефакта на стадии deploy (в файле [settings.xml](files/settings.xml) указаны параметры для входа).
+
+Настроены два шага: `maven clean deploy` и `maven clean test`, запускающиеся в зависимости от используемой ветки:
+
+![alt text](images/4.png)
+
+Артефакт успешно загружен:
+
+![alt text](images/5.png)
+
+В репозиторий добавлены [настройки проекта](https://github.com/RedRatInTheHat/example-teamcity/tree/master/.teamcity/ExampleTeamcity).
+
+В репозиторий добавлены обновления в ветке https://github.com/RedRatInTheHat/example-teamcity/tree/feature/add_reply <br/>
+Тесты запустились автоматически и прошли успешно:
+
+![alt text](images/6.png)
+
+Сливаем ветки, публикуем, меняем версию артефакта, всё работает, jar на месте (он и ранее публиковался, судя по скриншоту выше), так что дополнительных изменений не вносилось.
+
+![alt text](images/7.png)
