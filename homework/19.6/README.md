@@ -53,6 +53,12 @@
 2. Текст с `{ "message": "Already started" }` на `{ "message": "Running"}`.
 3. Issue поставить label: feature.
 
+### Решение
+
+Если я что-то понимаю в задачах бизнеса, то заявка будет выглядеть примерно так:
+
+![alt text](images/4.png)
+
 ### Developer
 
 Пришёл новый Issue на доработку, вам нужно:
