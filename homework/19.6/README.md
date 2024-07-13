@@ -33,7 +33,17 @@
 4. Создана директория `/python_api`.
 5. Скрипт из репозитория размещён в /python_api.
 6. Точка вызова: запуск скрипта.
-7. При комите в любую ветку должен собираться docker image с форматом имени hello:gitlab-$CI_COMMIT_SHORT_SHA . Образ должен быть выложен в Gitlab registry или yandex registry.   
+7. При комите в любую ветку должен собираться docker image с форматом имени hello:gitlab-$CI_COMMIT_SHORT_SHA . Образ должен быть выложен в Gitlab registry или yandex registry.
+
+### Решение
+
+В репозиторий добавлены файлы [Dockerfile](files/Dockerfile) и [requirements.txt](files/requirements.txt). Чтобы не проводить манипуляций со сменой зеркал centos:7, был взят образ centos/python-38-centos7.
+
+Построен [pipeline для сборки и загрузки образа](files/gitlab-ci.yml). Все данные закатаны в переменные проекта.
+
+Образ успешно загружен:
+
+![alt text](images/3.png)
 
 ### Product Owner
 

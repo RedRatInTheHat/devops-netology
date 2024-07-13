@@ -1,0 +1,14 @@
+stages:
+  - build
+  - deploy
+buidler:
+  stage: build
+  script:
+    - docker --version
+    - whoami
+    - docker build -t $REGISTRY_BASE/$GITLAB_USER/$PROJECT_NAME/$DOCKER_IMAGE_BASE_NAME-$CI_COMMIT_SHORT_SHA .
+deployer:
+  stage: deploy
+  script:
+    - docker login -u $GITLAB_USER -p $GITLAB_PASSWORD $REGISTRY_BASE
+    - docker push $REGISTRY_BASE/$GITLAB_USER/$PROJECT_NAME/$DOCKER_IMAGE_BASE_NAME-$CI_COMMIT_SHORT_SHA
