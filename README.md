@@ -31,3 +31,5 @@
 * [19.1 Жизненный цикл ПО](homework/19.1/README.md)
 * [19.3 Процессы CI/CD](homework/19.3/README.md)
 * [19.4 Jenkins](homework/19.4/README.md)
+* [19.5 Teamcity](homework/19.5/README.md)
+* [19.6 Gitlab](homework/19.6/README.md)
