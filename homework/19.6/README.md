@@ -81,7 +81,7 @@
 
 <details>
 <summary>build</summary>
-```
+<pre><code>
 Running with gitlab-runner 17.1.0 (fe451d5a)
   on blade-runner 3e1TCd28U, system ID: s_4e8d95cc559c
 Preparing the "shell" executor 00:00
@@ -128,12 +128,12 @@ $ docker build -t $REGISTRY_BASE/$GITLAB_USER/$PROJECT_NAME/$DOCKER_IMAGE_BASE_N
 #10 DONE 0.0s
 Cleaning up project directory and file based variables 00:00
 Job succeeded
-```
+</code></pre>
 </details>
 
 <details>
 <summary>deploy</summary>
-```
+<pre><code>
 Running with gitlab-runner 17.1.0 (fe451d5a)
   on blade-runner 3e1TCd28U, system ID: s_4e8d95cc559c
 Preparing the "shell" executor 00:00
@@ -194,7 +194,7 @@ b53a66890a58: Layer already exists
 gitlab-f7665962: digest: sha256:1897c7cb86d15f7f86501f69352b4714986cec683c711955641ff93cf8c4eb05 size: 3255
 Cleaning up project directory and file based variables 00:00
 Job succeeded
-```
+</code></pre>
 </details>
 
 ---
