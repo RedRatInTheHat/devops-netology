@@ -305,7 +305,11 @@ pipeline {
 
 ![alt text](images/5.png)
 
+Создан multibranch pipeline. Какой-то особой конфигруации не создавалось, просто репозиторий vector-role. Pipeline отрабатывает успешно:
 
+![alt text](images/6.png)
+
+![alt text](images/7.png)
 
 ---
 
