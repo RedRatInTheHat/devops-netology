@@ -279,25 +279,33 @@ pipeline {
     stages {
         stage("Prepare files") {
             steps {
-                git branch: 'main', url: 'https://github.com/RedRatInTheHat/vector-role.git'
+                dir ('vector-role') {
+                    git branch: 'main', url: 'https://github.com/RedRatInTheHat/vector-role.git'
+                }
             }
         }
         stage("Build") {
             steps {
-                sh 'python3 -m molecule test'
+                dir ('vector-role') {
+                    sh 'python3 -m molecule test'
+                }
             }
         }
     }
 }
 ```
 
-Для него выбрано имя vector-role, иначе пришлось бы сначала создавать папку для скаченного репозитория.
-
 Также успешно отрабатывает:
 
 ![alt text](images/2.png)
 
 ![alt text](images/4.png)
+
+Скрипт перенесён в [репозиторий vector-role](https://github.com/RedRatInTheHat/vector-role/blob/main/Jenkinsfile), для declarative pipline подключено обращение в репозиторий:
+
+![alt text](images/5.png)
+
+
 
 ---
 
