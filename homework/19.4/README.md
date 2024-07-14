@@ -311,9 +311,45 @@ pipeline {
 
 ![alt text](images/7.png)
 
+Scripted pipeline изменён для скачивания не через ssh, ноде-агенту добавлена метка linux, в скрипт добавлено изменение поведения в зависимости от переменной prod_run:
+
+```
+node("linux"){
+    stage("Git checkout"){
+        git 'https://github.com/aragastmatb/example-playbook.git'
+    }
+    stage("Sample define secret_check"){
+        secret_check=true
+        prod_run = true
+    }
+    stage("Run playbook"){
+        if (secret_check){
+            additional_parameters = prod_run ? "" : "--check --diff"
+            sh "ansible-playbook site.yml ${ additional_parameters } -i inventory/prod.yml"
+        }
+        else{
+            echo 'need more action'
+        }
+        
+    }
+}
+```
+
+prod_run == false:
+
+![alt text](images/8.png)
+
+prod_run == true:
+
+![alt text](images/9.png)
+
+Скрипт добавлен в файл [ScriptedJenkinsfile](https://github.com/RedRatInTheHat/vector-role/blob/main/ScriptedJenkinsfile).
+
 ---
 
 ## Необязательная часть
 
 1. Создать скрипт на groovy, который будет собирать все Job, завершившиеся хотя бы раз неуспешно. Добавить скрипт в репозиторий с решением и названием `AllJobFailure.groovy`.
 2. Создать Scripted Pipeline так, чтобы он мог сначала запустить через Yandex Cloud CLI необходимое количество инстансов, прописать их в инвентори плейбука и после этого запускать плейбук. Мы должны при нажатии кнопки получить готовую к использованию систему.
+
+#TODO когда-нибудь
