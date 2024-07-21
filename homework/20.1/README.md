@@ -138,7 +138,9 @@ P.S.: если при запуске некоторые контейнеры б�
 
 ---
 
-9. Изучите список [telegraf inputs](https://github.com/influxdata/telegraf/tree/master/plugins/inputs). 
+## Задание 9 
+
+Изучите список [telegraf inputs](https://github.com/influxdata/telegraf/tree/master/plugins/inputs). 
 Добавьте в конфигурацию telegraf следующий плагин - [docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker):
 ```
 [[inputs.docker]]
@@ -166,6 +168,47 @@ P.S.: если при запуске некоторые контейнеры б�
 веб-интерфейсе базы telegraf.autogen . Там должны появиться метрики, связанные с docker.
 
 Факультативно можете изучить какие метрики собирает telegraf после выполнения данного задания.
+
+### Решение
+
+Так уж сложилось, что на данный момент в `telegraf.conf` уже есть строчки:
+```conf
+[[inputs.docker]]
+  endpoint = "unix:///var/run/docker.sock"
+  container_names = []
+  timeout = "5s"
+  perdevice = true
+  total = false
+```
+А в docker-compose уже прокинут socket:
+```yml
+  telegraf:
+    # Full tag list: https://hub.docker.com/r/library/telegraf/tags/
+    build:
+      context: ./images/telegraf/
+      dockerfile: ./${TYPE}/Dockerfile
+      args:
+        TELEGRAF_TAG: ${TELEGRAF_TAG}
+    image: "telegraf"
+    environment:
+      HOSTNAME: "telegraf-getting-started"
+    # Telegraf requires network access to InfluxDB
+    links:
+      - influxdb
+    volumes:
+      # Mount for telegraf configuration
+      - ./telegraf/:/etc/telegraf/
+      # Mount for Docker API access
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - influxdb
+```
+
+Так что метрики были изначально и ничего перезапускать не пришлось:
+
+![alt text](images/9.1.png)
+
+---
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
 
