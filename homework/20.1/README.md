@@ -95,14 +95,22 @@
 
 ---
 
-7. Склонируйте себе [репозиторий](https://github.com/influxdata/sandbox/tree/master) и запустите TICK-стэк, 
+## Задание 7
+
+Склонируйте себе [репозиторий](https://github.com/influxdata/sandbox/tree/master) и запустите TICK-стэк, 
 используя технологии docker и docker-compose.
 
 В виде решения на это упражнение приведите скриншот веб-интерфейса ПО chronograf (`http://localhost:8888`). 
 
 P.S.: если при запуске некоторые контейнеры будут падать с ошибкой - проставьте им режим `Z`, например
 `./data:/var/lib:Z`
-#
+
+### Решение
+
+Заменив все `docker-compose` на `docker compose` в скрипте `sandbox` и поменяв атрибуты доступа к прокидываемым директориям, запускаем, наконец, TICK:
+
+![alt text](images/7.1.png)
+
 8. Перейдите в веб-интерфейс Chronograf (http://localhost:8888) и откройте вкладку Data explorer.
         
     - Нажмите на кнопку Add a query
