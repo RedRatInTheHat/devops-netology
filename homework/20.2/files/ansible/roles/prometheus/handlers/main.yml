@@ -1,0 +1,7 @@
+---
+- name: Restart and enable Prometheus service
+  become: true
+  service:
+    name: prometheus.service
+    state: restarted
+    enabled: true

@@ -1,0 +1,42 @@
+---
+- name: Include secret variables
+  ansible.builtin.include_vars: secret.yml
+
+- name: Install required packages
+  become: true
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - adduser
+    - libfontconfig1
+    - musl
+
+- name: Get Grafana .deb
+  ansible.builtin.get_url:
+    url: "https://dl.grafana.com/oss/release/grafana_{{ grafana_version }}_amd64.deb"
+    dest: /tmp/grafana.deb
+
+- name: Install Grafana
+  become: true
+  ansible.builtin.apt:
+    deb: /tmp/grafana.deb
+  notify: 
+    - Restart and enable Grafana service
+
+- name: Change default admin password
+  become: true
+  ansible.builtin.lineinfile:
+    path: /usr/share/grafana/conf/defaults.ini
+    search_string: 'admin_password = admin'
+    line: 'admin_password = {{ grafana_admin_password }}'
+  notify: 
+    - Restart and enable Grafana service
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Check 3000 port
+  ansible.builtin.wait_for:
+    port: "3000"
+    delay: 10

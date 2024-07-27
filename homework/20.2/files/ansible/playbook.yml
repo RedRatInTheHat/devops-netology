@@ -1,0 +1,23 @@
+- name: Prepare Node Exporter server
+  hosts: node-exporter
+  tags:
+    - ne
+  roles:
+    - initialisation
+    - node-exporter
+
+- name: Create Prometheus server
+  hosts: prometheus
+  tags:
+    - prometheus
+  roles:
+    - initialisation
+    - prometheus
+
+- name: Prepare Grafana server
+  hosts: grafana
+  tags:
+    - grafana
+  roles:
+    - initialisation
+    - grafana

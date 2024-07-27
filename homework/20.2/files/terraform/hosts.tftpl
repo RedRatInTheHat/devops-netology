@@ -1,0 +1,9 @@
+---
+all:
+  hosts:
+    %{~ for instance_group_name, instance_ip in vm_public_ips ~}
+    ${ instance_group_name }:
+      ansible_host: ${ instance_ip }
+    %{~ endfor ~}
+    
+    

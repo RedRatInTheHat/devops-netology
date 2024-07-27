@@ -1,0 +1,7 @@
+---
+- name: Restart and enable Node Exporter service
+  become: true
+  ansible.builtin.service:
+    name: node-exporter.service
+    state: restarted
+    enabled: true

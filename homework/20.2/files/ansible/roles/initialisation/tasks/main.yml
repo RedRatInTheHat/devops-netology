@@ -1,0 +1,15 @@
+---
+- name: Wait for connection (120 seconds max)
+  ansible.builtin.wait_for_connection:
+    timeout: 120
+
+- name: Remove apt lock file
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: "/var/lib/dpkg/lock"
+
+- name: Update apt packages
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes

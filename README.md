@@ -34,3 +34,4 @@
 * [19.5 Teamcity](homework/19.5/README.md)
 * [19.6 Gitlab](homework/19.6/README.md)
 * [20.1 Системы мониторинга](homework/20.1/README.md)
+* [20.2 Средство визуализации Grafana](homework/20.2/README.md)
