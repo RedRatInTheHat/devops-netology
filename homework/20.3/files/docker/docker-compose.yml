@@ -86,6 +86,13 @@ services:
     depends_on:
       - elasticsearch-hot
 
+  some_application:
+    image: library/python:3.9-alpine
+    container_name: some_app
+    volumes:
+      - ../run.py:/opt/run.py:Z
+    entrypoint: python3 /opt/run.py
+
 volumes:
   elasticsearch_hot_data:
     driver: local
