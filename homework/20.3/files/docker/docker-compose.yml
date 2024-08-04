@@ -20,7 +20,6 @@ services:
       - 'elasticsearch_hot_data:/bitnami'
     ports:
       - 9200:9200
-      - 9300:9300
     networks:
       - default_network
     depends_on:
@@ -35,7 +34,7 @@ services:
       - ELASTICSEARCH_NODE_NAME=elasticsearch-warm
       - ELASTICSEARCH_HEAP_SIZE=1g
       - ELASTICSEARCH_CLUSTER_MASTER_HOSTS=elasticsearch-hot,elasticsearch-warm
-      - ELASTICSEARCH_NODE_ROLES=master,data_warm,remote_cluster_client
+      - ELASTICSEARCH_NODE_ROLES=master,data_warm,remote_cluster_client,data_content
       - ELASTICSEARCH_IS_DEDICATED_NODE=true
     volumes:
       - 'elasticsearch_warm_data:/bitnami'
@@ -76,8 +75,6 @@ services:
     image: logstash:8.10.2
     environment:
       - ELASTIC_HOSTS=http://elasticsearch-hot:9200
-    ports:
-      - 5044:5044
     volumes:
       - ../logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
       - ../logstash.yml:/opt/logstash/config/logstash.yml:ro
