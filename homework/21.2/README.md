@@ -12,6 +12,26 @@
 
 Обоснуйте свой выбор.
 
+### Решение
+
+Чтобы не распыляться, возьмём API Gateway, походящие под условия и чаще всего упоминаемые во всевозможных топах: Kong Gateway, Apache APISIX, Tyk, KrakenD, Amazon API Gateway. Ещё хотелось бы рассмотреть Yandex Cloud API Gateway как крупное доступное решение для облака, но судя по всему он не предоставляет HTTPS терминацию именно на стороне API Gateway, только другими решениями.
+
+
+| Критерий | Kong Gateway | Apache APISIX | Tyk | KrakenD | Amazon API Gateway |
+|----------|--------------|---------------|-----|---------|-----------|
+| Цена | Есть Open Source и платный Enterprise | Open Source (есть платный облачный API7) | Есть Open Source и платные тарифы в облаке | Есть Community Edition и Enterprise Edition | Есть free tier с ограничением по количеству запросов. |
+| Размещение | SaaS (Kong Konnect) и размещение на хосте, в том числе с использованием контейнеров. | Размещение на хосте, в том числе с использованием контейнеров. Есть SaaS API7. | Размещение на хосте, в том числе с использованием контейнеров. Есть SaaS. | Размещение на хосте, в том числе с использованием контейнеров, в облаке. | Облако |
+| Производительсность | Хвалятся производительностью | Хвалятся, что они производительнее Kong | Хвалятся, что они производительнее Kong | Быстрый и нетребовательный | Хвалится производительностью |
+| Расширения | Kong Plugin Hub | Apache APISIX®️ Plugin Hub | Можно создавать свои плагины, можно найти готовые на GitHub | Можно создавать свои плагины | Есть расширения |
+| Аутентификация | Basic, Key, OAuth 2.0, LDAP, OpenID Connect, HMAC, JWT | Key, HMAC, OpenID Connect, LDAP , Basic, Wolf RBAC | Basic, Bearer Token, OAuth 2.0, HMAC, JWT, OpenID Connect | Basic, JWT, OAuth 2.0, mTLS, Google Cloud, NTLM | OAuth 2.0, Basic, JWT  |
+| Управление трафиком | Timeout, Retry, Circuit Breaker, Rate Limit | Rate Limit, Circuit Breaker, Retry, Timeout | Rate Limit, Circuit Breaker, Timeout, Retry | Rate Limit, Circuit Breaker, Timeout, Retry, Bot detector | Timeout, Retry, Circuit Breaker, Rate Limit |
+| Мониторинг | Built-in, Prometheus, Datadog, StatsD | Prometheus | Built-in | OpenTelemetry, Prometheus, InfluxDB, Datadog, AWS X-Ray, Azure Monitor и др. | Amazon CloudWatch Alarms, Amazon CloudWatch Logs, Amazon EventBridge, AWS CloudTrail Log Monitoring |
+
+Судя по тому, что практически все решения предоставляют сравнение с Kong, это наиболее распространённое решение. А это обычно означает наличие большого комьюнити и развитую документацию, что на этапе внедрения особенно важно.
+
+С другой стороны, если нам нужно что-то шустрое и нетребовательное, можно попробовать KrakenD. К тому же, по личному ощущению, документация для него наиболее полная.
+
+
 ## Задача 2: Брокер сообщений
 
 Составьте таблицу возможностей различных брокеров сообщений. На основе таблицы сделайте обоснованный выбор решения.
