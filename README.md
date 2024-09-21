@@ -43,3 +43,4 @@
 * [21.3 Микросервисы: подходы](homework/21.3/README.md)
 * [21.4 Микросервисы: масштабирование](homework/21.4/README.md)
 * [22.1 Kubernetes. Причины появления. Команда kubectl](homework/22.1/README.md)
+* [22.2 Базовые объекты K8S](homework/22.2/README.md)
