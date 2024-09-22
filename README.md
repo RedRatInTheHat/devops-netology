@@ -45,3 +45,4 @@
 * [22.1 Kubernetes. Причины появления. Команда kubectl](homework/22.1/README.md)
 * [22.2 Базовые объекты K8S](homework/22.2/README.md)
 * [22.3 Запуск приложений в K8S](homework/22.3/README.md)
+* [22.4 Сетевое взаимодействие в Kubernetes. Часть 1](homework/22.4/README.md)
