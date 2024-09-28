@@ -7,7 +7,21 @@
 4. Продемонстрировать, что приложения видят друг друга с помощью Service.
 5. Предоставить манифесты Deployment и Service в решении, а также скриншоты или вывод команды п.4.
 
-------
+---
+
+#### Решение
+
+Созданы файлы конфигураций для deployment ([multitool.yml](k8s/deployment/multitool.yml) и [nginx.yml](k8s/deployment/nginx.yml)) и соответствующих им serviсe ([multitool.yml](k8s/service/multitool.yml) и [nginx.yml](k8s/service/nginx.yml))
+
+![alt text](img/1.1.png)
+
+Проверяем, видят ли приложения друг друга:
+
+![alt text](img/1.2.png)
+
+Есть контакт.
+
+---
 
 ### Задание 2. Создать Ingress и обеспечить доступ к приложениям снаружи кластера
 
