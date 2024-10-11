@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mt-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mt
+  template:
+    metadata:
+      labels:
+        app: mt
+    spec:
+      containers:
+      - name: multitool
+        image: praqma/network-multitool
+        volumeMounts:
+        - name: volume
+          mountPath: /mnt/volume
+      volumes:
+      - name: volume
+        persistentVolumeClaim:
+          claimName: mt-pvc
