@@ -48,3 +48,4 @@
 * [22.4 Сетевое взаимодействие в Kubernetes. Часть 1](homework/22.4/README.md)
 * [22.5 Сетевое взаимодействие в Kubernetes. Часть 2](homework/22.5/README.md)
 * [22.6 Хранение в K8s. Часть 1](homework/22.6/README.md)
+* [22.7 Хранение в K8s. Часть 2](homework/22.7/README.md)
