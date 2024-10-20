@@ -32,7 +32,7 @@
 
 ### Решение
 
-Для запуска нескольких версий чартов подготовлены файлы переменных [praqma.yml](k8s/multitool/praqma.yml) и [wbitt.yml](k8s/multitool/wbitt.yml).
+Для запуска нескольких версий чартов подготовлены файлы переменных [praqma.yml](k8s/multitool/praqma.yml), [wbitt.yml](k8s/multitool/wbitt.yml) и [alpine.yml](k8s/multitool/alpine.yml)
 
 Запускаем:
 
