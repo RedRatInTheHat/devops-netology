@@ -52,3 +52,4 @@
 * [22.8 Конфигурация приложений](homework/22.8/README.md)
 * [22.9 Управление доступом](homework/22.9/README.md)
 * [22.10 HELM](homework/22.10/README.md)
+* [22.11 Компоненты Kubernetes](homework/22.11/README.md)
