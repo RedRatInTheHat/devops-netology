@@ -53,3 +53,4 @@
 * [22.9 Управление доступом](homework/22.9/README.md)
 * [22.10 HELM](homework/22.10/README.md)
 * [22.11 Компоненты Kubernetes](homework/22.11/README.md)
+* [22.12 Установка Kubernetes с помощью kubeadm, kubespray](homework/22.12/README.md)
