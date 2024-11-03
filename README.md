@@ -54,3 +54,4 @@
 * [22.10 HELM](homework/22.10/README.md)
 * [22.11 Компоненты Kubernetes](homework/22.11/README.md)
 * [22.12 Установка Kubernetes с помощью kubeadm, kubespray](homework/22.12/README.md)
+* [22.13 Как работает сеть в K8S](homework/22.13/README.md)
