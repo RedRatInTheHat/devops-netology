@@ -1,0 +1,18 @@
+deployment:
+  name: frontend
+
+service:
+  name: frontend
+
+deploymentLabels: 
+  app: frontend
+podLabels: 
+  app: frontend
+
+service:
+  name: frontend
+
+networkPolicy:
+  name: frontend
+
+ingressPodSelector: {}

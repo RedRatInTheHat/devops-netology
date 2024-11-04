@@ -1,0 +1,28 @@
+deployment:
+  name: multitool
+
+replicaCount: 1
+
+image:
+  name: multitool
+  repository: wbitt/network-multitool 
+
+deploymentLabels: 
+  app: multitool
+podLabels: 
+  app: multitool
+
+service:
+  name: multitool
+  port:
+    name: web
+    port: 80
+    protocol: TCP
+    targetPort: 80
+
+networkPolicy:
+  name: multitool
+
+ingressPodSelector:
+  matchLabels:
+    app: nginx

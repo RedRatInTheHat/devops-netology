@@ -1,0 +1,20 @@
+deployment:
+  name: cache
+
+service:
+  name: cache
+
+deploymentLabels: 
+  app: cache
+podLabels: 
+  app: cache
+
+service:
+  name: cache
+
+networkPolicy:
+  name: cache
+
+ingressPodSelector:
+  matchLabels:
+    app: backend

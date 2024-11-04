@@ -1,0 +1,20 @@
+deployment:
+  name: backend
+
+service:
+  name: backend
+
+deploymentLabels: 
+  app: backend
+podLabels: 
+  app: backend
+
+service:
+  name: backend
+
+networkPolicy:
+  name: backend
+
+ingressPodSelector:
+  matchLabels:
+    app: frontend
