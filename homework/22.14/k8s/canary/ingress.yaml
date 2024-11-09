@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: greeting.ingess.ru
+    http:
+      paths:
+      - path: /
+        backend: 
+          service:
+            name: greeting-v1
+            port:
+              number: 80
+        pathType: ImplementationSpecific

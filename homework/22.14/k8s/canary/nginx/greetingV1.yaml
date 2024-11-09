@@ -1,0 +1,21 @@
+deployment:
+  name: greeting-v1
+
+deploymentLabels: 
+  app: greeting-v1
+
+podLabels: 
+  app: greeting-v1
+
+configMap:
+  name: greeting-v1
+
+htmlGreeting: |
+    <h1>Here is Johny!</h1>
+    ​<span style='font-size:100px;'>&#128682;</span>
+
+service:
+  name: greeting-v1
+
+serviceSelector:
+  app: greeting-v1

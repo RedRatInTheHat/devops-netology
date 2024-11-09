@@ -1,0 +1,36 @@
+deployment:
+  name: nginx
+
+replicaCount: 1
+
+image:
+  name: nginx
+  repository: nginx:latest
+
+deploymentLabels: 
+  app: nginx
+
+podLabels: 
+  app: nginx
+
+configMap:
+  name: nginx
+
+volume:
+  name: nginx-configmap
+  htmlPath: /usr/share/nginx/html
+
+htmlGreeting: |
+    <h1>Howdy!</h1>
+    ​<span style='font-size:100px;'>&#128072;</span>
+
+service:
+  name: nginx
+  port:
+    name: web
+    port: 80
+    protocol: TCP
+    targetPort: 80
+
+serviceSelector:
+  app: nginx

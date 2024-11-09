@@ -61,3 +61,14 @@ Recreate полностью подходит подо все условия – 
 
 ### Решение
 
+Deployment'ы, ConfigMap'ы и Service'ы были созданы с помощью шаблонов Helm: [deploymnet.yaml](k8s/canary/nginx/templates/deployment.yaml), [configMap.yaml](k8s/canary/nginx/templates/configMap.yaml) и [service.yaml](k8s/canary/nginx/templates/service.yaml) соответственно. Для разных версий приложения созданы разные наборы параметров: [greetingV1](k8s/canary/nginx/greetingV1.yaml) и [greetingV2](k8s/canary/nginx/greetingV2.yaml):
+
+![alt text](img/3.1.png)
+
+Для более старого приложения создан ingress: [ingress.yaml](k8s/canary/ingress.yaml). Другая версия приложения подаётся с помощью другого ingress с параметрами canary и canary-weight: [canaryIngress.yaml](k8s/canary/canaryIngress.yaml):
+
+![alt text](img/3.2.png)
+
+Теперь сервер возвращает разные страницы:
+
+![alt text](img/3.3.png)

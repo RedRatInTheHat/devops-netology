@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: canary
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "50"
+spec:
+  rules:
+  - host: greeting.ingess.ru
+    http:
+      paths:
+      - path: /
+        backend: 
+          service:
+            name: greeting-v2
+            port:
+              number: 80
+        pathType: ImplementationSpecific
