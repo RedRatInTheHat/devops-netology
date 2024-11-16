@@ -21,6 +21,7 @@ variables.pkrvars.hcl
 personal.auto.tfvars
 secret.yml
 hosts.yml
+meta.yml
 
 # Ansible
 ansible.cfg
