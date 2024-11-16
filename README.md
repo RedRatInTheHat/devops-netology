@@ -57,3 +57,4 @@
 * [22.13 Как работает сеть в K8S](homework/22.13/README.md)
 * [22.14 Обновление приложений](homework/22.14/README.md)
 * [22.15 Troubleshooting](homework/22.15/README.md)
+* [23.1 Организация сети](homework/23.1/README.md)
