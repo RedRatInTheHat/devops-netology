@@ -34,6 +34,18 @@ variable "default_cidr" {
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
 
+variable "private_subnet_name" {
+    type        = string
+    default     = "private"
+    description = "Private subnet name"
+}
+
+variable "private_cidr" {
+  type        = list(string)
+  default     = ["192.168.20.0/24"]
+  description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
+}
+
 # VM
 
 variable "platform_id" {
@@ -107,6 +119,12 @@ variable "vm_boot_disk_name" {
   description = "Name of the boot disk for NAT instance"
 }
 
+variable "private_vm_boot_disk_name" {
+  type        = string
+  default     = "private-vm-boot-disk"
+  description = "Name of the boot disk for NAT instance"
+}
+
 variable "vm_boot_disk_image_id" {
   type        = string
   default     = "fd8ludhmmor1p0c3q6k0"
@@ -141,4 +159,26 @@ variable "public_vm_name" {
   type        = string
   default     = "public-vm"
   description = "Public instance name"
+}
+
+# Private VM
+
+variable "private_vm_name" {
+  type        = string
+  default     = "private-vm"
+  description = "Private instance name"
+}
+
+# Route table
+
+variable "route_table_name" {
+  type        = string
+  default     = "route_table"
+  description = "Route table name"
+}
+
+variable "route_table_destination" {
+  type        = string
+  default     = "0.0.0.0/0"
+  description = "Route prefix in CIDR notation."
 }

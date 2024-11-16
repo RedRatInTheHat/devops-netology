@@ -15,4 +15,27 @@
 
  ### Решение
 
- 
+ Созадна сеть vps с подсетями public и private (см. [vpc.tf](terraform/vpc.tf)):
+
+ ![alt text](img/1.png)
+
+Добавлена security group (впрочем, используется только для приватной вм, см. [secruity-groups.tf](terraform/secrurity-groups.tf)):
+
+![alt text](img/2.png)
+
+Добавлены виртуальные машины NAT, public и private (см. [vm.tf](terraform/vm.tf)):
+
+![alt text](img/3.png)
+
+Создан route table (см. [route-table.tf](terraform/route-table.tf)):
+
+![alt text](img/4.png)
+
+Проверяем доступ с виртуальных машин.<br/>
+С публичной:
+
+![alt text](img/5.png)
+
+С приватной (через публичную ВМ):
+
+![alt text](img/6.png)
