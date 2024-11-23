@@ -182,3 +182,57 @@ variable "route_table_destination" {
   default     = "0.0.0.0/0"
   description = "Route prefix in CIDR notation."
 }
+
+# Service account
+
+variable "service_account_name" {
+  type        = string
+  default     = "bucket-sa"
+  description = "The name of the service account"
+}
+
+variable "sa_admin_role" {
+  type        = string
+  default     = "storage.admin"
+  description = "The IAM role to assign"
+}
+
+variable "static_key_description" {
+  type        = string
+  default     = "Static access key for object storage"
+  description = "The description of static key"
+}
+
+# Bucket
+
+variable "bucket_name" {
+  default     = "image-bucket-netology-23.2"
+  type        = string
+  description = "The name of the storage bucket. Must be unique within Yandex Cloud."
+}
+
+variable "bucket_max_size" {
+  default     = 104857600  // Default value set to 100 MB
+  type        = number
+  description = "Maximum size of the storage bucket in bytes."
+}
+
+variable "is_readable" {
+  type        = bool
+  default     = true
+  description = "Are bucket files allowed to be read by anonymous"
+}
+
+# Bucket image
+
+variable "bucket_image_key" {
+  type        = string
+  default     = "greeting"
+  description = "The key (name) for the storage object."
+}
+
+variable "bucket_image_source_path" {
+  type        = string
+  default     = "./img/oh-hi-mark.jpg"
+  description = "The local path to the file that will be uploaded to the storage bucket."
+}
