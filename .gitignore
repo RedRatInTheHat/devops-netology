@@ -4,7 +4,7 @@ variables.pkrvars.hcl
 
 # secret files
 .secret.txt
-.meta.yml
+*meta.yml
 
 # Local .terraform directories and files
 **/.terraform/*

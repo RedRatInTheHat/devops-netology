@@ -183,7 +183,7 @@ variable "route_table_destination" {
   description = "Route prefix in CIDR notation."
 }
 
-# Service account
+# Service accounts
 
 variable "service_account_name" {
   type        = string
@@ -201,6 +201,18 @@ variable "static_key_description" {
   type        = string
   default     = "Static access key for object storage"
   description = "The description of static key"
+}
+
+variable "editor_sa_name" {
+  description = "The name of the Yandex IAM editor service account."
+  type        = string
+  default     = "editor-sa"
+}
+
+variable "editor_role" {
+  type        = string
+  default     = "editor"
+  description = "The IAM role to assign"
 }
 
 # Bucket
@@ -227,7 +239,7 @@ variable "is_readable" {
 
 variable "bucket_image_key" {
   type        = string
-  default     = "greeting"
+  default     = "greeting.jpg"
   description = "The key (name) for the storage object."
 }
 
@@ -235,4 +247,131 @@ variable "bucket_image_source_path" {
   type        = string
   default     = "./img/oh-hi-mark.jpg"
   description = "The local path to the file that will be uploaded to the storage bucket."
+}
+
+# Instance group
+
+variable "instance_group_name" {
+  type        = string
+  default     = "lamp-ig"
+  description = "The name of the Yandex Compute Instance Group."
+}
+
+variable "ig_platform_id" {
+  type        = string
+  default     = "standard-v3"
+  description = "The platform ID used for the instances."
+}
+
+variable "ig_core_fraction" {
+  type        = number
+  default     = 20
+  description = "The core fraction allocated to the instances."
+}
+
+variable "ig_memory" {
+  type        = number
+  default     = 1
+  description = "The amount of memory (in GiB) allocated to the instances."
+}
+
+variable "ig_cores" {
+  type        = number
+  default     = 2
+  description = "The number of cores allocated to the instances."
+}
+
+variable "ig_boot_disk_mode" {
+  type        = string
+  default     = "READ_WRITE"
+  description = "The mode of the boot disk."
+}
+
+variable "lamp_image_id" {
+  type        = string
+  default     = "fd827b91d99psvq5fjit"
+  description = "The Yandex Cloud image ID for the boot disk."
+}
+
+variable "ig_boot_disk_type" {
+  type        = string
+  default     = "network-hdd"
+  description = "The type of the boot disk."
+}
+
+variable "ig_boot_disk_size" {
+  type        = number
+  default     = 3
+  description = "The size of the boot disk (in GiB)."
+}
+
+variable "has_nat_for_ig" {
+  type        = bool
+  default     = true
+  description = "Whether to enable NAT for the instances."
+}
+
+variable "ig_size" {
+  type        = number
+  default     = 3
+  description = "The desired size of the compute instance group."
+}
+
+variable "ig_availability_zones" {
+  type        = list(string)
+  default     = ["ru-central1-a"]
+  description = "A list of availability zones for instance deployment."
+}
+
+variable "dp_max_unavailable" {
+  type        = number
+  default     = 1
+  description = "The maximum number of unavailable instances during deployment."
+}
+
+variable "max_expansion" {
+  type        = number
+  default     = 0
+  description = "The maximum number of instances that can be expanded during deployment."
+}
+
+variable "lamp-metadata-path" {
+  type    = string
+  default = "./lamp-meta.yml"
+}
+
+variable "hch_interval" {
+  type        = number
+  default     = 30
+  description = "Interval in seconds between health checks."
+}
+
+variable "hch_timeout" {
+  type        = number
+  default     = 10
+  description = "Timeout in seconds for each health check request."
+}
+
+variable "hch_healthy_threshold" {
+  type        = number
+  default     = 2
+  description = "Number of consecutive successful checks required before marking the instance as healthy."
+}
+
+variable "hch_unhealthy_threshold" {
+  type        = number
+  default     = 2
+  description = "Number of consecutive failed checks required before marking the instance as unhealthy."
+}
+
+variable "hch_http_port" {
+  type        = number
+  default     = 80
+  description = "Port on which to perform HTTP health checks."
+}
+
+variable "hch_http_path" {
+  type        = string
+  default     = "/"
+  description = "Path for the health check request."
 }
