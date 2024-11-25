@@ -57,7 +57,11 @@ resource "yandex_compute_instance_group" "fixed-ig" {
     }
   }
 
-  load_balancer {
-    target_group_name = var.target_group_name
+  # load_balancer {
+  #   target_group_name = var.target_group_name
+  # }
+
+  application_load_balancer {
+    target_group_name = var.alb_target_group_name
   }
 }

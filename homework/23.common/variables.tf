@@ -153,6 +153,12 @@ variable "sg_nat_name" {
   default     = "nat-instance-security-group"
 }
 
+variable "alb_sg_name" {
+  type        = string
+  default     = "alb-sg"
+  description = "The name of the ALB instance security group"
+}
+
 # Public VM
 
 variable "public_vm_name" {
@@ -382,6 +388,12 @@ variable "target_group_name" {
   description = "The name of the target group."
 }
 
+variable "alb_target_group_name" {
+  type        = string
+  default     = "fixed-ig-alb-tg"
+  description = "The name of the target group."
+}
+
 # Network balancer
 
 variable "nlb_name" {
@@ -424,4 +436,90 @@ variable "nlb_healthcheck_port" {
   type        = number
   default     = 80
   description = "The port used for health checking the targets."
+}
+
+# Application balancer
+
+variable "alb_backend_group_name" {
+  type        = string
+  default     = "alb-backend-group"
+  description = "The name of the backend group for the application load balancer."
+}
+
+variable "alb_backend_name" {
+  type        = string
+  default     = "alb-backend"
+  description = "The name of the backend for the application load balancer."
+}
+
+variable "alb_backend_port" {
+  type        = number
+  default     = 80
+  description = "The port on which the backend will listen."
+}
+
+variable "alb_healthcheck_timeout" {
+  type        = string
+  default     = "10s"
+  description = "The timeout for the health check requests."
+}
+
+variable "alb_healthcheck_interval" {
+  type        = string
+  default     = "2s"
+  description = "The interval between health checks."
+}
+
+variable "alb_healthcheck_port" {
+  type        = number
+  default     = 80
+  description = "The port used for the health check."
+}
+
+variable "alb_healthcheck_path" {
+  type        = string
+  default     = "/"
+  description = "The path for the HTTP health check."
+}
+
+variable "alb_virtual_host_name" {
+  type        = string
+  default     = "alb-virtual-host"
+  description = "The name of the Application Load Balancer (ALB) virtual host."
+}
+
+variable "alb_route_name" {
+  type        = string
+  default     = "alb-route"
+  description = "The name of the route for the ALB virtual host."
+}
+
+variable "alb_timeout" {
+  type        = string
+  default     = "60s"
+  description = "The timeout value for the backend group in seconds."
+}
+
+variable "alb_router_name" {
+  type        = string
+  default     = "alb-router"
+  description = "The name of the HTTP router for the application load balancer."
+}
+
+variable "alb_name" {
+  type        = string
+  default     = "application-load-balancer"
+  description = "The name of the Application Load Balancer (ALB)."
+}
+
+variable "alb_listener_name" {
+  type        = string
+  default     = "alb-listener"
+  description = "The name of the ALB listener."
+}
+
+variable "alb_listener_ports" {
+  type        = list(number)
+  default     = [80]
+  description = "A list of ports for the ALB listener."
 }
