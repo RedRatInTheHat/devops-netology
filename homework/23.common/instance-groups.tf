@@ -56,4 +56,8 @@ resource "yandex_compute_instance_group" "fixed-ig" {
       path = var.hch_http_path
     }
   }
+
+  load_balancer {
+    target_group_name = var.target_group_name
+  }
 }

@@ -375,3 +375,53 @@ variable "hch_http_path" {
   default     = "/"
   description = "Path for the health check request."
 }
+
+variable "target_group_name" {
+  type        = string
+  default     = "fixed-ig-tg"
+  description = "The name of the target group."
+}
+
+# Network balancer
+
+variable "nlb_name" {
+  type        = string
+  default     = "network-balancer"
+  description = "The name of the network load balancer."
+}
+
+variable "nlb_listener_name" {
+  type        = string
+  default     = "nlb-listener"
+  description = "The name of the listener for the network load balancer."
+}
+
+variable "nlb_listener_port" {
+  type        = number
+  default     = 80
+  description = "The port on which the listener will listen."
+}
+
+variable "nlb_healthcheck_name" {
+  type        = string
+  default     = "balancer-health-check"
+  description = "The name of the health check for the load balancer."
+}
+
+variable "nlb_unhealthy_threshold" {
+  type        = number
+  default     = 2
+  description = "The number of failed health checks before a target is considered unhealthy."
+}
+
+variable "nlb_healthy_threshold" {
+  type        = number
+  default     = 2
+  description = "The number of successful health checks before a target is considered healthy."
+}
+
+variable "nlb_healthcheck_port" {
+  type        = number
+  default     = 80
+  description = "The port used for health checking the targets."
+}

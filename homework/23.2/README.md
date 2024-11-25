@@ -21,3 +21,41 @@
  - Проверить работоспособность, удалив одну или несколько ВМ.
  
 4. (дополнительно)* Создать Application Load Balancer с использованием Instance group и проверкой состояния.
+
+
+### Решение
+
+Создан bucket (один раз, чтобы засорять тем же названием, но со случайным суффиксом), автоматизирована загрузка в него изображения: [buckets.yml](../23.common/buckets.tf).
+
+![alt text](img/1.png)
+
+Добавлена группа машин: [instance-groups.tf](../23.common/instance-groups.tf):
+
+![alt text](img/2.png)
+
+![alt text](img/3.png)
+
+![alt text](img/4.png)
+
+Добавлен сетевой балансировщик: [balancers.tf](../23.common/balancers.tf):
+
+![alt text](img/5.png)
+
+При обращении по его ip получаем ту же картину:
+
+![alt text](img/6.png)
+
+Удаляем одну из созданных виртуальных машин:
+
+![alt text](img/7.png)
+
+Томми всё ещё здесь:
+
+![alt text](img/8.png)
+
+А через некоторое время создаётся новая машина:
+
+![alt text](img/9.png)
+
+![alt text](img/10.png)
+
