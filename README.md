@@ -59,3 +59,4 @@
 * [22.15 Troubleshooting](homework/22.15/README.md)
 * [23.1 Организация сети](homework/23.1/README.md)
 * [23.2 Вычислительные мощности. Балансировщики нагрузки](homework/23.2/README.md)
+* [23.3 Безопасность в облачных провайдерах](homework/23.3/README.md)

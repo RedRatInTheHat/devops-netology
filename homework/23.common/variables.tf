@@ -221,10 +221,22 @@ variable "editor_role" {
   description = "The IAM role to assign"
 }
 
+variable "kms_role" {
+  type        = string
+  default     = "kms.keys.encrypterDecrypter"
+  description = "The role assigned to the IAM member for KMS."
+}
+
 # Bucket
 
 variable "bucket_name" {
   default     = "image-bucket-netology-23.2"
+  type        = string
+  description = "The name of the storage bucket. Must be unique within Yandex Cloud."
+}
+
+variable "kms_bucket_name" {
+  default     = "bucket-netology-23.3.1"
   type        = string
   description = "The name of the storage bucket. Must be unique within Yandex Cloud."
 }
@@ -239,6 +251,12 @@ variable "is_readable" {
   type        = bool
   default     = true
   description = "Are bucket files allowed to be read by anonymous"
+}
+
+variable "sse_algorithm" {
+  type        = string
+  default     = "aws:kms"
+  description = "The server-side encryption algorithm."
 }
 
 # Bucket image
@@ -522,4 +540,30 @@ variable "alb_listener_ports" {
   type        = list(number)
   default     = [80]
   description = "A list of ports for the ALB listener."
+}
+
+# KMS key
+
+variable "kms_key_name" {
+  type        = string
+  default     = "bucket-kms-key"
+  description = "The name of the KMS key."
+}
+
+variable "kms_key_description" {
+  type        = string
+  default     = "KMS key for secret bucket"
+  description = "Description for the KMS key."
+}
+
+variable "kms_key_algorithm" {
+  type        = string
+  default     = "AES_256"
+  description = "The default algorithm for the KMS key."
+}
+
+variable "kms_key_rotation_period" {
+  type        = string
+  default     = "24h"
+  description = "The rotation period for the KMS key."
 }
