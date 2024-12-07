@@ -40,10 +40,46 @@ variable "private_subnet_name" {
     description = "Private subnet name"
 }
 
+variable "private_subnet_name_2" {
+    type        = string
+    default     = "private_2"
+    description = "Private subnet name"
+}
+
+variable "private_subnet_name_3" {
+    type        = string
+    default     = "private_3"
+    description = "Private subnet name"
+}
+
 variable "private_cidr" {
   type        = list(string)
   default     = ["192.168.20.0/24"]
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
+}
+
+variable "private_cidr_2" {
+  type        = list(string)
+  default     = ["192.168.21.0/24"]
+  description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
+}
+
+variable "private_cidr_3" {
+  type        = list(string)
+  default     = ["192.168.22.0/24"]
+  description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
+}
+
+variable "zone_b" {
+  type        = string
+  default     = "ru-central1-b"
+  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
+}
+
+variable "zone_d" {
+  type        = string
+  default     = "ru-central1-a"
+  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
 
 # VM
@@ -159,6 +195,12 @@ variable "alb_sg_name" {
   description = "The name of the ALB instance security group"
 }
 
+variable "mysql_sg_name" {
+  type        = string
+  default     = "mysql-sg"
+  description = "The name of the MySQL security group."
+}
+
 # Public VM
 
 variable "public_vm_name" {
@@ -212,7 +254,7 @@ variable "static_key_description" {
 variable "editor_sa_name" {
   description = "The name of the Yandex IAM editor service account."
   type        = string
-  default     = "editor-sa"
+  default     = "editor"
 }
 
 variable "editor_role" {
@@ -277,7 +319,7 @@ variable "bucket_image_source_path" {
 
 variable "instance_group_name" {
   type        = string
-  default     = "lamp-ig"
+  default     = "ig"
   description = "The name of the Yandex Compute Instance Group."
 }
 
@@ -566,4 +608,95 @@ variable "kms_key_rotation_period" {
   type        = string
   default     = "24h"
   description = "The rotation period for the KMS key."
+}
+
+# MySQL
+
+variable "mysql_cluster_name" {
+  type        = string
+  default     = "mysql-cluster"
+  description = "The name of the MySQL cluster."
+}
+
+variable "mysql_environment" {
+  type        = string
+  default     = "PRESTABLE"
+  description = "The environment for the MySQL cluster."
+}
+
+variable "mysql_version" {
+  type        = string
+  default     = "8.0"
+  description = "The version of MySQL to be used in the cluster."
+}
+
+variable "mysql_deletion_protection" {
+  type        = bool
+  default     = true
+  description = "Enable or disable deletion protection for the MySQL cluster."
+}
+
+variable "mysql_resource_preset_id" {
+  type        = string
+  default     = "b1.medium"
+  description = "Resource preset ID for the MySQL cluster."
+}
+
+variable "mysql_disk_type_id" {
+  type        = string
+  default     = "network-ssd"
+  description = "Disk type ID for the MySQL cluster."
+}
+
+variable "mysql_disk_size" {
+  type        = number
+  default     = 20
+  description = "Disk size in GB for the MySQL cluster."
+}
+
+variable "mysql_maintenance_window_type" {
+  type        = string
+  default     = "ANYTIME"
+  description = "Type of maintenance window for the MySQL cluster."
+}
+
+variable "mysql_backup_window_start_hours" {
+  type        = number
+  default     = 23
+  description = "Start hour for the backup window."
+}
+
+variable "mysql_backup_window_start_minutes" {
+  type        = number
+  default     = 59
+  description = "Start minutes for the backup window."
+}
+
+variable "mysql_host_assign_public_ip" {
+  type        = bool
+  default     = false
+  description = "Whether to assign a public IP to the host in the MySQL cluster."
+}
+
+variable "mysql_database_name" {
+  type        = string
+  default     = "netology_db"
+  description = "The name of the MySQL database."
+}
+
+variable "mysql_user_name" {
+  type        = string
+  default     = "sqler"
+  description = "The name of the MySQL user."
+}
+
+variable "mysql_user_password" {
+  type        = string
+  description = "The password for the MySQL user."
+}
+
+variable "mysql_user_roles" {
+  type        = list(string)
+  default     = ["ALL"]
+  description = "Roles assigned to the MySQL user for the database."
 }
