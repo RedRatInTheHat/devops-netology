@@ -24,7 +24,7 @@
 
 ## Решение
 
-В VPC добавлены ещё две приватные подсети (одна из них использует переменную zone-d, которая на самом деле зона a; в zone d конфигурация b1.medium не поддерживается, так что остаётся только заговорщицки подмигивать): [vpc.tf](../23.common/vpc.tf)
+В VPC добавлены ещё две приватные подсети (одна из них является уже использованной зоной a; в zone d конфигурация b1.medium не поддерживается, так что остаётся только заговорщицки подмигивать): [vpc.tf](../23.common/vpc.tf)
 
 ![alt text](img/1.1.png)
 
@@ -43,3 +43,37 @@
 Не мудрствуя лукаво подключаемся к базе данных через nat-инстанс, и видим, что запрошенные пользователь и база данных созданы:
 
 ![alt text](img/1.7.png)
+
+---
+
+В файл [text](../23.common/vpc.tf) добавлены дополнительные публичные сети (от греха подальше также без зоны d, хотя стоило попробовать):
+
+![alt text](img/2.1.png)
+
+Добавлены новые сервисный аккаунт ([service-accounts.tf](../23.common/service-accounts.tf)) и группа безопасности [security-groups.tf](../23.common/secrurity-groups.tf).
+
+Созданы master-ноды и worker-ноды: [k8s.tf](../23.common/k8s.tf):
+
+![alt text](img/2.2.png)
+
+![alt text](img/2.3.png)
+
+![alt text](img/2.4.png)
+
+Подключаемся:
+
+![alt text](img/2.5.png)
+
+Контакт есть.
+
+Добавляем [deployment](../23.common/k8s/phpmyadmin.yml) с phpmyadmin и [loadbalancer](../23.common/k8s/load-balancer.yml) для узлов:
+
+Компоненты развернулись, а в yandex cloud добавился network balancer:
+
+![alt text](img/2.6.png)
+
+![alt text](img/2.7.png)
+
+Проверяем подключение к ранее созданной MySQL БД:
+
+![alt text](img/2.8.png)

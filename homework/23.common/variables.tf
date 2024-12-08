@@ -28,9 +28,33 @@ variable "subnet_default_name" {
     description = "Default subnet name"
 }
 
+variable "public_subnet_name_2" {
+    type        = string
+    default     = "public_2"
+    description = "Default subnet name"
+}
+
+variable "public_subnet_name_3" {
+    type        = string
+    default     = "public_3"
+    description = "Default subnet name"
+}
+
 variable "default_cidr" {
   type        = list(string)
   default     = ["192.168.10.0/24"]
+  description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
+}
+
+variable "public_cidr_2" {
+  type        = list(string)
+  default     = ["192.168.11.0/24"]
+  description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
+}
+
+variable "public_cidr_3" {
+  type        = list(string)
+  default     = ["192.168.12.0/24"]
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
 
@@ -70,6 +94,12 @@ variable "private_cidr_3" {
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
 
+variable "zone_a" {
+  type        = string
+  default     = "ru-central1-a"
+  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
+}
+
 variable "zone_b" {
   type        = string
   default     = "ru-central1-b"
@@ -78,7 +108,7 @@ variable "zone_b" {
 
 variable "zone_d" {
   type        = string
-  default     = "ru-central1-a"
+  default     = "ru-central1-d"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
 
@@ -201,6 +231,12 @@ variable "mysql_sg_name" {
   description = "The name of the MySQL security group."
 }
 
+variable "k8s_sg_name" {
+  type        = string
+  default     = "regional-k8s-sg"
+  description = "The name of the MySQL K8S group."
+}
+
 # Public VM
 
 variable "public_vm_name" {
@@ -267,6 +303,42 @@ variable "kms_role" {
   type        = string
   default     = "kms.keys.encrypterDecrypter"
   description = "The role assigned to the IAM member for KMS."
+}
+
+variable "k8s_service_account_name" {
+  type        = string
+  default     = "regional-k8ser"
+  description = "The name of the Kubernetes regional service account."
+}
+
+variable "k8s_service_account_description" {
+  type        = string
+  default     = "K8S regional service account"
+  description = "The description of the Kubernetes regional service account."
+}
+
+variable "k8s_clusters_agent_role" {
+  type        = string
+  default     = "k8s.clusters.agent"
+  description = "The role assigned to the service account."
+}
+
+variable "vpc_public_admin_role" {
+  type        = string
+  default     = "vpc.publicAdmin"
+  description = "The role for public admin access to VPC."
+}
+
+variable "images_puller_role" {
+  type        = string
+  default     = "container-registry.images.puller"
+  description = "The role for pulling images from the container registry."
+}
+
+variable "encrypter_decrypter_role" {
+  type        = string
+  default     = "kms.keys.encrypterDecrypter"
+  description = "The role for encrypting and decrypting keys."
 }
 
 # Bucket
@@ -699,4 +771,12 @@ variable "mysql_user_roles" {
   type        = list(string)
   default     = ["ALL"]
   description = "Roles assigned to the MySQL user for the database."
+}
+
+# K8S cluster
+
+variable "k8s_cluster_name" {
+  type        = string
+  default     = "k8s-regional"
+  description = "The name of the Kubernetes cluster."
 }

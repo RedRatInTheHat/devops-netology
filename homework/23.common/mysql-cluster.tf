@@ -22,19 +22,19 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   }
 
   host {
-    zone             = var.default_zone
+    zone             = yandex_vpc_subnet.private.zone
     subnet_id        = yandex_vpc_subnet.private.id
     assign_public_ip = var.mysql_host_assign_public_ip
   }
 
   host {
-    zone             = var.zone_b
+    zone             = yandex_vpc_subnet.private-2.zone
     subnet_id        = yandex_vpc_subnet.private-2.id
     assign_public_ip = var.mysql_host_assign_public_ip
   }
 
   host {
-    zone             = var.zone_d
+    zone             = yandex_vpc_subnet.private-3.zone
     subnet_id        = yandex_vpc_subnet.private-3.id
     assign_public_ip = var.mysql_host_assign_public_ip
   }
